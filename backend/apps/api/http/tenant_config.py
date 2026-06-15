@@ -7,13 +7,16 @@ import uuid
 
 from asgiref.sync import sync_to_async
 from django.http import JsonResponse
+from django.utils.decorators import method_decorator
 from django.views import View
+from django.views.decorators.csrf import csrf_exempt
 
 from apps.entities.tenant import Tenant
 
 logger = logging.getLogger(__name__)
 
 
+@method_decorator(csrf_exempt, name='dispatch')
 class TenantListView(View):
     """Return a list of active tenants with their ``tenant_id`` and ``name``.
 

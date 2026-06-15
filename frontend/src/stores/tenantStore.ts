@@ -8,7 +8,7 @@ interface TenantStore {
 }
 
 export const useTenantStore = create<TenantStore>((set) => ({
-  currentTenantId: localStorage.getItem(STORAGE_KEY) || 'example',
+  currentTenantId: localStorage.getItem(STORAGE_KEY) || 'default',
   setCurrentTenant: (tenantId: string) => {
     localStorage.setItem(STORAGE_KEY, tenantId);
     set({ currentTenantId: tenantId });
