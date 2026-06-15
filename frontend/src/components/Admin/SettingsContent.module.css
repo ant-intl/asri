@@ -1,0 +1,86 @@
+.card {
+  border-radius: 8px;
+}
+
+.sectionTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px !important;
+}
+
+.icon {
+  color: #1890ff;
+}
+
+.switchItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.switchItem:last-of-type {
+  border-bottom: none;
+}
+
+.switchLabel {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.switchLabel :global(.ant-text-secondary) {
+  font-size: 12px;
+}
+
+.itemGroup {
+  margin-bottom: 24px;
+}
+
+.groupTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1f1f1f;
+  margin-bottom: 12px;
+}
+
+.configRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.configRow:last-child {
+  border-bottom: none;
+}
+
+.configLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.configDesc {
+  font-size: 12px;
+  color: #666;
+  margin-left: 24px;
+  margin-top: 4px;
+}
+
+.tagSection {
+  margin-top: 16px;
+}
+
+.tagInput {
+  margin-bottom: 12px;
+}
+
+.tagList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}

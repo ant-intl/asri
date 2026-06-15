@@ -1,0 +1,61 @@
+--only-binary=tiktoken
+
+# Web Framework
+django==4.1.12
+jinja2>=3.1
+gunicorn
+daphne>=4.0.0
+
+# Django Extensions
+django-health-check
+django-cors-headers>=4.3.0
+
+redis
+
+# WebSocket Support
+channels>=4.0.0
+channels-redis>=4.1.0
+
+# Database
+pymysql
+# pysqlite3-binary  # Enable when using SQLite and built-in sqlite3 doesn't meet requirements
+
+# HTTP Client
+requests
+httpx>=0.25.0
+
+# Tracing (optional, install opentelemetry via plugin)
+opentracing
+
+# LLM Integration
+openai>=1.0.0
+
+# Data Validation
+pydantic>=2.0
+
+# Environment
+python-dotenv
+
+# Token Counting
+tiktoken>=0.5
+
+# Security
+cryptography>=41.0
+
+# Testing
+pytest>=8.0
+pytest-django>=4.5
+pytest-asyncio>=0.21
+
+psutil==7.2.2
+jsonschema-specifications==2025.9.1
+msgpack==1.1.2
+mysql-connector-python==9.6.0
+protobuf==6.33.5
+pluggy==1.6.0
+proto-plus==1.27.1
+propcache==0.4.1
+packaging==26.0
+pyopenssl==25.1.0
+
+aiohttp==3.13.3

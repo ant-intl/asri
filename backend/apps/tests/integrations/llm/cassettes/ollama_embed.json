@@ -1,0 +1,12 @@
+{
+  "body": {
+    "embedding": [0.0023064255, -0.009327292, 0.015797347, -0.0077780667, -0.0046922765, 0.018145794, -0.0022540092, -0.0034810603, 0.011096939, -0.015714586]
+  },
+  "status_code": 200,
+  "_meta": {
+    "recorded_at": "2024-03-05T12:00:00Z",
+    "provider": "ollama",
+    "endpoint": "/api/embeddings",
+    "note": "Ollama embedding response (truncated). See: https://github.com/ollama/ollama/blob/main/docs/api.md#generate-embeddings"
+  }
+}

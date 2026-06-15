@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+  asri:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - DJANGO_SECRET_KEY=django-insecure-change-me-in-production
+    volumes:
+      - asri_data:/app/backend/db.sqlite3
+      - asri_logs:/root/logs/asri
+    restart: unless-stopped
+
+volumes:
+  asri_data:
+  asri_logs:

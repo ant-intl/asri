@@ -1,0 +1,2212 @@
+/* ============================================
+   TodoList Panel - OTEL/Multi-Turn Gantt Style
+   Reference: OTEL trace timeline UI
+   ============================================ */
+
+/* ============================================
+   Container & Header
+   ============================================ */
+.container {
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.containerCompact {
+  background: transparent;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: #fff;
+  border-bottom: 1px solid #f0f2f5;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+  margin-left: 16px;
+}
+
+.title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1a1a;
+  white-space: nowrap;
+}
+
+.summary {
+  font-size: 12px;
+  color: #64748b;
+  background: #e2e8f0;
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+.expandBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: #f5f5f5;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #666;
+  transition: all 0.2s ease;
+}
+
+.expandBtn:hover {
+  background: #e8e8e8;
+  color: #1890ff;
+}
+
+/* ============================================
+   Conversation List
+   ============================================ */
+.conversationList {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ============================================
+   Conversation Block
+   ============================================ */
+.conversationBlock {
+  background: #fafbfc;
+  border: 1px solid #f0f2f5;
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.conversationBlockHighlighted {
+  border-color: #1890ff;
+  background: #f0f7ff;
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+}
+
+/* Conversation Header */
+.conversationHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.conversationTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+}
+
+.conversationQuestion {
+  font-size: 13px;
+  font-weight: 500;
+  color: #1f2937;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.conversationMeta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.conversationDuration {
+  font-size: 12px;
+  color: #6b7280;
+  font-family: 'SF Mono', 'Menlo', 'Monaco', monospace;
+}
+
+/* Status Badges - unified gray tones */
+.statusBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  font-size: 10px;
+  font-weight: 500;
+  border-radius: 10px;
+}
+
+/* Status colors: completed=light green, failed=light red, interrupted=light gray, pending=light yellow, running=light blue */
+.statusPending {
+  background: #fefce8;
+  color: #ca8a04;
+  border: 1px solid #fef08a;
+}
+
+.statusRunning {
+  background: #eff6ff;
+  color: #2563eb;
+  border: 1px solid #bfdbfe;
+}
+
+.statusCompleted {
+  background: #f0fdf4;
+  color: #16a34a;
+  border: 1px solid #bbf7d0;
+}
+
+.statusFailed {
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+}
+
+.statusInterrupted {
+  background: #f5f5f5;
+  color: #737373;
+  border: 1px solid #e5e5e5;
+}
+
+/* ============================================
+   Timeline Track
+   ============================================ */
+.timelineTrack {
+  position: relative;
+  height: 24px;
+  background: #f1f5f9;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.timelineScale {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 4px;
+  font-size: 9px;
+  color: #94a3b8;
+  font-family: 'SF Mono', 'Menlo', 'Monaco', monospace;
+}
+
+.scaleMark {
+  flex-shrink: 0;
+}
+
+.timelineBars {
+  position: absolute;
+  top: 2px;
+  left: 0;
+  right: 0;
+  height: 14px;
+}
+
+.timelineBar {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+/* Unified gray tones */
+.timelineBarThinking {
+  background: linear-gradient(90deg, #c8c8c8, #b0b0b0);
+}
+
+.timelineBarToolCall {
+  background: linear-gradient(90deg, #c8c8c8, #b0b0b0);
+}
+
+.timelineBarAnswer {
+  background: linear-gradient(90deg, #c8c8c8, #b0b0b0);
+}
+
+.timelineBarInterrupted {
+  background: linear-gradient(90deg, #d0d0d0, #b8b8b8);
+}
+
+.timelineBarRunning {
+  animation: timelinePulse 1.5s ease-in-out infinite;
+}
+
+@keyframes timelinePulse {
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+  }
+  50% {
+    opacity: 0.85;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+  }
+}
+
+/* ============================================
+   Step Details - background fill layout
+   ============================================ */
+.stepDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-left: 4px;
+}
+
+/* Background fill row container */
+.stepRowBg {
+  position: relative;
+  min-height: 28px;
+  border-radius: 6px;
+  overflow: hidden;
+  transition: background-color 0.15s ease;
+}
+
+/* Background progress bar - extends from the left */
+.progressBg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  z-index: 0;
+}
+
+/* Background progress bar animation */
+.progressBgRunning {
+  animation: bgPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes bgPulse {
+  0%, 100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+/* Info layer - floats above the progress bar */
+.stepContent {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 8px;
+  min-height: 28px;
+  z-index: 1;
+}
+
+/* Time - placed before status, right-aligned */
+.stepTime {
+  font-size: 11px;
+  color: #6b7280;
+  flex-shrink: 0;
+  min-width: 50px;
+  text-align: right;
+  font-family: 'SF Mono', 'Menlo', 'Monaco', monospace;
+}
+
+.stepStatus {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  /* Default pending state - light yellow */
+  background: #fefce8;
+  border: 1px solid #fde047;
+}
+
+/* Status icon styles - icon color matches background */
+
+/* Completed state - light green background, green checkmark */
+.statusIconCheck {
+  font-size: 10px;
+  color: #16a34a;
+}
+
+/* Interrupted state - light gray background, gray exclamation mark */
+.statusIconExclamation {
+  font-size: 10px;
+  color: #737373;
+}
+
+/* Failed state - light red background, red exclamation mark */
+.statusIconFailed {
+  font-size: 10px;
+  color: #dc2626;
+}
+
+/* Pending state - light yellow background, yellow hollow circle */
+.statusIconCircle {
+  display: block;
+  width: 8px;
+  height: 8px;
+  border: 2px solid #ca8a04;
+  border-radius: 50%;
+  background: transparent;
+}
+
+/* Running state - light blue background, blue hollow circle */
+.statusIconCircleRunning {
+  border-color: #2563eb;
+}
+
+/* Running state background - light blue */
+.statusIconRunning {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+}
+
+/* Completed state background - light green */
+.statusIconCompleted {
+  background: #f0fdf4;
+  border: 1px solid #86efac;
+}
+
+/* Failed state background - light red */
+.statusIconFailedBg {
+  background: #fef2f2;
+  border: 1px solid #fca5a5;
+}
+
+/* Interrupted state background - light gray */
+.statusIconInterrupted {
+  background: #f5f5f5;
+  border: 1px solid #d4d4d4;
+}
+
+/* Pending state background - light yellow (already defined by default in .stepStatus) */
+
+.stepIcon {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, #e6f4ff 0%, #f0f7ff 100%);
+  border: 1px solid #d6e4ff;
+  color: #1890ff;
+}
+
+.stepIconThinking {
+  background: linear-gradient(135deg, #e6f4ff 0%, #f0f7ff 100%);
+  color: #1890ff;
+}
+
+.stepIconToolCall {
+  background: linear-gradient(135deg, #e6f4ff 0%, #f0f7ff 100%);
+  color: #1890ff;
+}
+
+.stepIconAnswer {
+  background: linear-gradient(135deg, #e6f4ff 0%, #f0f7ff 100%);
+  color: #1890ff;
+}
+
+.stepIconInterrupted {
+  background: linear-gradient(135deg, #f5f5f5 0%, #fafafa 100%);
+  border-color: #e5e5e5;
+  color: #9ca3af;
+}
+
+.stepLabel {
+  font-size: 12px;
+  color: #374151;
+  font-weight: 500;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.stepTimeRange {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 11px;
+  color: #6b7280;
+  font-family: 'SF Mono', 'Menlo', 'Monaco', monospace;
+  min-width: 75px;
+  flex-shrink: 0;
+}
+
+.stepTimeSeparator {
+  color: #9ca3af;
+  margin: 0 2px;
+}
+
+/* Time scale bar */
+.timeScaleBar {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 26px 4px 26px;
+  font-size: 9px;
+  color: #94a3b8;
+  font-family: 'SF Mono', 'Menlo', 'Monaco', monospace;
+  background: #f8fafc;
+  border-radius: 4px;
+  margin-bottom: 4px;
+}
+
+/* ============================================
+   Loading & Empty States
+   ============================================ */
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 40px 20px;
+  color: #64748b;
+  font-size: 13px;
+}
+
+.loadingIcon {
+  font-size: 16px;
+  color: #1677ff;
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.emptyIcon {
+  font-size: 32px;
+  color: #cbd5e1;
+  margin-bottom: 12px;
+}
+
+.emptyText {
+  font-size: 14px;
+  color: #475569;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.emptySubText {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: #f8fafc;
+  border-top: 1px solid #e8edf3;
+  font-size: 12px;
+  color: #64748b;
+}
+
+.footer svg {
+  color: #1677ff;
+}
+
+/* ============================================
+   Scrollbar
+   ============================================ */
+.conversationList::-webkit-scrollbar,
+.ganttContainer::-webkit-scrollbar {
+  width: 6px;
+}
+
+.conversationList::-webkit-scrollbar-track,
+.ganttContainer::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.conversationList::-webkit-scrollbar-thumb,
+.ganttContainer::-webkit-scrollbar-thumb {
+  background: #e2e8f0;
+  border-radius: 3px;
+}
+
+.conversationList::-webkit-scrollbar-thumb:hover,
+.ganttContainer::-webkit-scrollbar-thumb:hover {
+  background: #cbd5e1;
+}
+
+/* ============================================
+   Legacy Styles (kept for compatibility)
+   ============================================ */
+
+/* Old Gantt styles - using new conversationBlock instead */
+.ganttContainer {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ganttCompact {
+  padding: 8px 12px;
+}
+
+.ganttConversation {
+  background: #fafbfc;
+  border: 1px solid #f0f2f5;
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ganttConversationHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.ganttConversationBadge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 10px;
+  background: #f1f5f9;
+  border-radius: 6px;
+  font-size: 11px;
+  color: #475569;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.ganttConversationIndex {
+  background: #94a3b8;
+  color: white;
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.ganttConversationTitle {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+  min-width: 0;
+}
+
+.ganttTrack {
+  position: relative;
+  height: 32px;
+  background: #f8fafc;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.ganttProgressBar {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  font-size: 10px;
+  color: white;
+  font-weight: 500;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  transition: width 0.3s ease, left 0.3s ease;
+  min-width: 40px;
+}
+
+.ganttBarThinking {
+  background: linear-gradient(90deg, #c8c8c8, #b0b0b0);
+}
+
+.ganttBarToolCall {
+  background: linear-gradient(90deg, #c8c8c8, #b0b0b0);
+}
+
+.ganttBarToolResult {
+  background: linear-gradient(90deg, #c8c8c8, #b0b0b0);
+}
+
+.ganttBarAnswer {
+  background: linear-gradient(90deg, #c8c8c8, #b0b0b0);
+}
+
+.ganttBarRunning {
+  animation: ganttPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes ganttPulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.ganttBarLabel {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ganttScale {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 4px;
+  margin-top: 2px;
+}
+
+.ganttScaleMark {
+  font-size: 9px;
+  color: #94a3b8;
+}
+
+.ganttSteps {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 4px;
+}
+
+.ganttStepRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 2px 0;
+  min-height: 24px;
+}
+
+.ganttStepIcon {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, #e6f4ff 0%, #f0f7ff 100%);
+  border: 1px solid #d6e4ff;
+  color: #1890ff;
+}
+
+.ganttStepIconThinking {
+  background: linear-gradient(135deg, #e6f4ff 0%, #f0f7ff 100%);
+  color: #1890ff;
+}
+
+.ganttStepIconToolCall {
+  background: linear-gradient(135deg, #e6f4ff 0%, #f0f7ff 100%);
+  color: #1890ff;
+}
+
+.ganttStepIconToolResult {
+  background: linear-gradient(135deg, #e6f4ff 0%, #f0f7ff 100%);
+  color: #1890ff;
+}
+
+.ganttStepIconAnswer {
+  background: linear-gradient(135deg, #e6f4ff 0%, #f0f7ff 100%);
+  color: #1890ff;
+}
+
+.ganttStepInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  flex: 1;
+  min-width: 0;
+}
+
+.ganttStepLabel {
+  font-size: 11px;
+  color: #334155;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ganttStepMeta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 9px;
+  color: #94a3b8;
+}
+
+.ganttStepTime {
+  font-family: 'SF Mono', 'Menlo', 'Monaco', 'Courier New', monospace;
+}
+
+.ganttStepDuration {
+  background: #f1f5f9;
+  padding: 0 4px;
+  border-radius: 3px;
+  font-size: 10px;
+  color: #6b7280;
+  font-family: 'SF Mono', 'Menlo', 'Monaco', monospace;
+}
+
+.ganttStatusBadge {
+  font-size: 9px;
+  padding: 1px 6px;
+  border-radius: 8px;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.ganttStatusPending {
+  color: #9ca3af;
+  background: #fafafa;
+  border: 1px solid #e5e5e5;
+}
+
+.ganttStatusRunning {
+  color: #1890ff;
+  background: #f0f7ff;
+  border: 1px solid #d6e4ff;
+}
+
+.ganttStatusCompleted {
+  color: #9ca3af;
+  background: #fafafa;
+  border: 1px solid #e5e5e5;
+}
+
+.ganttStatusFailed {
+  color: #b0a0a0;
+  background: #fafafa;
+  border: 1px solid #f0e8e8;
+}
+
+.ganttStatusInterrupted {
+  color: #a0a0a0;
+  background: #fafafa;
+  border: 1px solid #eee;
+}
+
+/* Old tree styles - kept for compatibility */
+.treeContainer {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 12px;
+  font-size: 13px;
+}
+
+.treeCompact {
+  padding: 8px 4px;
+}
+
+.treeNodeWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.treeNode {
+  display: flex;
+  align-items: center;
+  min-height: 36px;
+  position: relative;
+  padding: 4px 8px;
+  margin: 2px 0;
+  border-radius: 6px;
+  transition: background 0.15s ease;
+}
+
+.treeNode:hover {
+  background: #f8fafc;
+}
+
+.treeNode[data-level="1"] {
+  margin-left: 24px;
+}
+
+.treeNode[data-level="2"] {
+  margin-left: 48px;
+}
+
+.treeNode[data-level="3"] {
+  margin-left: 72px;
+}
+
+.treeNodeCircle {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  position: relative;
+  flex-shrink: 0;
+  margin-right: 10px;
+  transition: all 0.2s ease;
+}
+
+.treeContent {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+
+.treeTime {
+  color: #94a3b8;
+  font-size: 11px;
+  font-weight: 500;
+  min-width: 36px;
+  font-family: 'SF Mono', 'Menlo', 'Monaco', 'Courier New', monospace;
+  flex-shrink: 0;
+}
+
+.treeLabel {
+  color: #334155;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 13px;
+}
+
+.treeStatus {
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  flex-shrink: 0;
+  font-weight: 500;
+}
+
+.treeStatusPending {
+  color: #9ca3af;
+  background: #fafafa;
+  border: 1px solid #e5e5e5;
+}
+
+.treeStatusRunning {
+  color: #1890ff;
+  background: #f0f7ff;
+  border: 1px solid #d6e4ff;
+}
+
+.treeStatusCompleted {
+  color: #9ca3af;
+  background: #fafafa;
+  border: 1px solid #e5e5e5;
+}
+
+.treeStatusFailed {
+  color: #b0a0a0;
+  background: #fafafa;
+  border: 1px solid #f0e8e8;
+}
+
+.treeStatusInterrupted {
+  color: #a0a0a0;
+  background: #fafafa;
+  border: 1px solid #eee;
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+@media (max-width: 1200px) {
+  .container {
+    width: 260px;
+    min-width: 240px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .container {
+    display: none;
+  }
+}
+
+/* ============================================
+   Expand/Collapse
+   ============================================ */
+.stepRowWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.stepRowBg {
+  cursor: pointer;
+}
+
+.stepRowExpanded {
+  background-color: rgba(59, 130, 246, 0.05);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.stepRowExpanded:hover {
+  background-color: rgba(59, 130, 246, 0.08);
+}
+
+.expandIcon {
+  margin-left: auto;
+  font-size: 10px;
+  color: #9ca3af;
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.expandIconExpanded {
+  transform: rotate(180deg);
+  color: #666;
+}
+
+/* Detail panel */
+.stepDetailPanel {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 12px;
+  margin-top: 4px;
+  max-height: 300px;
+  overflow-y: auto;
+  animation: slideDown 0.2s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.detailGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12px;
+}
+
+.detailLabel {
+  color: #6b7280;
+  font-weight: 500;
+  margin-right: 8px;
+}
+
+.detailContent {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.detailPre {
+  margin: 0;
+  padding: 8px;
+  background: #f9fafb;
+  border-radius: 4px;
+  font-size: 11px;
+  font-family: 'SF Mono', 'Menlo', 'Monaco', monospace;
+  color: #374151;
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+/* ============================================
+   Gantt Timeline Style - OTEL/OTel-like Design
+   ============================================ */
+.ganttContainer {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px 16px;
+  font-family: 'SF Mono', 'Menlo', 'Monaco', 'Courier New', monospace;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ganttCompact {
+  padding: 8px 12px;
+  gap: 12px;
+}
+
+/* Conversation Row - represents a single turn */
+.ganttConversation {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ganttConversationHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+}
+
+/* Conversation title badge */
+.ganttConversationBadge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  background: #f1f5f9;
+  border-radius: 6px;
+  font-size: 11px;
+  color: #475569;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.ganttConversationIndex {
+  background: #94a3b8;
+  color: white;
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.ganttConversationTitle {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+  min-width: 0;
+}
+
+/* Gantt timeline track */
+.ganttTrack {
+  position: relative;
+  height: 32px;
+  background: #f8fafc;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+/* Progress bar base */
+.ganttProgressBar {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  font-size: 10px;
+  color: white;
+  font-weight: 500;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  transition: width 0.3s ease, left 0.3s ease;
+  min-width: 40px;
+}
+
+/* Gantt bar colors by type (muted) */
+.ganttBarThinking {
+  background: linear-gradient(90deg, #c4cdd8, #a8b4c4);
+}
+
+.ganttBarToolCall {
+  background: linear-gradient(90deg, #d4c8b8, #c0b4a4);
+}
+
+.ganttBarToolResult {
+  background: linear-gradient(90deg, #c8d4c8, #b0c8b0);
+}
+
+.ganttBarAnswer {
+  background: linear-gradient(90deg, #b8c0d4, #a4b0c8);
+}
+
+.ganttBarConversation {
+  background: linear-gradient(90deg, #c8cdd0, #a8b0b8);
+  height: 6px;
+  top: auto;
+  bottom: 4px;
+  border-radius: 3px;
+}
+
+/* Running animation */
+.ganttBarRunning {
+  animation: ganttPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes ganttPulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Gantt bar label */
+.ganttBarLabel {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Timeline scale indicator */
+.ganttScale {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 4px;
+  margin-top: 2px;
+}
+
+.ganttScaleMark {
+  font-size: 9px;
+  color: #94a3b8;
+}
+
+/* Step details container */
+.ganttSteps {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 4px;
+}
+
+/* Step detail row */
+.ganttStepRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 2px 0;
+  min-height: 24px;
+}
+
+.ganttStepIcon {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, #e6f4ff 0%, #f0f7ff 100%);
+  border: 1px solid #d6e4ff;
+  color: #1890ff;
+}
+
+.ganttStepIconThinking {
+  background: linear-gradient(135deg, #e6f4ff 0%, #f0f7ff 100%);
+  color: #1890ff;
+}
+
+.ganttStepIconToolCall {
+  background: linear-gradient(135deg, #e6f4ff 0%, #f0f7ff 100%);
+  color: #1890ff;
+}
+
+.ganttStepIconToolResult {
+  background: linear-gradient(135deg, #e6f4ff 0%, #f0f7ff 100%);
+  color: #1890ff;
+}
+
+.ganttStepIconAnswer {
+  background: linear-gradient(135deg, #e6f4ff 0%, #f0f7ff 100%);
+  color: #1890ff;
+}
+
+.ganttStepInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  flex: 1;
+  min-width: 0;
+}
+
+.ganttStepLabel {
+  font-size: 11px;
+  color: #334155;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ganttStepMeta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 9px;
+  color: #94a3b8;
+}
+
+.ganttStepTime {
+  font-family: 'SF Mono', 'Menlo', 'Monaco', 'Courier New', monospace;
+}
+
+.ganttStepDuration {
+  background: #f1f5f9;
+  padding: 0 4px;
+  border-radius: 3px;
+}
+
+/* Status badge */
+.ganttStatusBadge {
+  font-size: 9px;
+  padding: 1px 6px;
+  border-radius: 8px;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.ganttStatusPending {
+  color: #9ca3af;
+  background: #fafafa;
+  border: 1px solid #e5e5e5;
+}
+
+.ganttStatusRunning {
+  color: #94a3b8;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+.ganttStatusCompleted {
+  color: #9ca3af;
+  background: #fafafa;
+  border: 1px solid #e5e7eb;
+}
+
+.ganttStatusFailed {
+  color: #bcaaac;
+  background: #fefafa;
+  border: 1px solid #fde8e8;
+}
+
+.ganttStatusInterrupted {
+  color: #c4b0a0;
+  background: #fffaf5;
+  border: 1px solid #feeee0;
+}
+
+/* Scrollbar for Gantt */
+.ganttContainer::-webkit-scrollbar {
+  width: 6px;
+}
+
+.ganttContainer::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.ganttContainer::-webkit-scrollbar-thumb {
+  background: #e2e8f0;
+  border-radius: 3px;
+}
+
+.ganttContainer::-webkit-scrollbar-thumb:hover {
+  background: #cbd5e1;
+}
+.container {
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  border-radius: 8px 0 0 8px; /* Only left side rounded to merge with page edge */
+  border: 1px solid #e8edf3;
+  border-right: none; /* No right border as it's at screen edge */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Compact mode for embedding in collapse cards */
+.containerCompact {
+  border: none;
+  border-radius: 0;
+  background: transparent;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: #fff;
+  border-bottom: 1px solid #f0f2f5;
+}
+
+.title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.summary {
+  font-size: 12px;
+  color: #64748b;
+  background: #e2e8f0;
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+/* ============================================
+   Loading & Empty States
+   ============================================ */
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 40px 20px;
+  color: #64748b;
+  font-size: 13px;
+}
+
+.loadingIcon {
+  font-size: 16px;
+  color: #1677ff;
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.emptyIcon {
+  font-size: 32px;
+  color: #cbd5e1;
+  margin-bottom: 12px;
+}
+
+.emptyText {
+  font-size: 14px;
+  color: #475569;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.emptySubText {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+/* ============================================
+   DAG - Directed Acyclic Graph Style
+   ============================================ */
+.dagContainer {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.dagContainerCompact {
+  padding: 8px 0;
+}
+
+/* DAG Level - groups parallel tasks */
+.dagLevel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.dagLevelParallel {
+  background: rgba(248, 250, 252, 0.5);
+  border-radius: 8px;
+  padding: 8px;
+  border: 1px dashed #e2e8f0;
+}
+
+/* Connector line between levels */
+.dagLevelConnector {
+  position: absolute;
+  top: -8px;
+  left: 20px;
+  width: 2px;
+  height: 8px;
+  background: #e2e8f0;
+}
+
+.dagLevelContent {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.dagLevelParallel .dagLevelContent {
+  gap: 4px;
+}
+
+/* DAG Node */
+.dagNode {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  padding: 4px 0;
+}
+
+/* DAG Node Track */
+.dagNodeTrack {
+  position: relative;
+  width: 40px;
+  height: 32px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Horizontal line for parallel tasks */
+.dagHorizontalLine {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 2px;
+  background: #fb923c;
+  transform: translateY(-50%);
+}
+
+/* Vertical branch lines */
+.dagBranchTop {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 12px;
+  height: 50%;
+  border-left: 2px solid #fb923c;
+  border-top: 2px solid #fb923c;
+  border-radius: 8px 0 0 0;
+}
+
+.dagBranchBottom {
+  position: absolute;
+  left: 0;
+  bottom: 50%;
+  width: 12px;
+  height: 50%;
+  border-left: 2px solid #fb923c;
+  border-bottom: 2px solid #fb923c;
+  border-radius: 0 0 0 8px;
+}
+
+.dagBranchMiddle {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 12px;
+  border-left: 2px solid #fb923c;
+}
+
+/* DAG Node Circle */
+.dagNodeCircle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: #fff;
+  z-index: 1;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 3px #fff;
+  position: relative;
+}
+
+/* Node colors - unified blue tones */
+.nodePending {
+  background: linear-gradient(135deg, #e6f4ff 0%, #f0f7ff 100%);
+  border: 1px solid #d6e4ff;
+}
+
+.nodeRunning {
+  background: linear-gradient(135deg, #1677ff 0%, #4096ff 100%);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.nodeThinking {
+  background: linear-gradient(135deg, #e6f4ff 0%, #f0f7ff 100%);
+  border: 1px solid #d6e4ff;
+}
+
+.nodeCompleted {
+  background: linear-gradient(135deg, #e6f4ff 0%, #f0f7ff 100%);
+  border: 1px solid #d6e4ff;
+}
+
+.nodeFailed {
+  background: linear-gradient(135deg, #f5f5f5 0%, #fafafa 100%);
+  border: 1px solid #e5e5e5;
+}
+
+.nodeInterrupted {
+  background: linear-gradient(135deg, #f5f5f5 0%, #fafafa 100%);
+  border: 1px solid #e5e5e5;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 3px #fff, 0 0 0 5px rgba(24, 144, 255, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 0 3px #fff, 0 0 0 8px rgba(24, 144, 255, 0.1);
+  }
+}
+
+.runningIcon {
+  font-size: 10px;
+}
+
+/* DAG Node Content */
+.dagNodeContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.dagNodeHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.dagNodeTitle {
+  font-size: 12px;
+  font-weight: 500;
+  color: #1e293b;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dagNodeTime {
+  font-size: 10px;
+  color: #94a3b8;
+  font-family: 'JetBrains Mono', monospace;
+  flex-shrink: 0;
+}
+
+/* DAG Node Progress */
+.dagNodeProgress {
+  height: 3px;
+  background: #e2e8f0;
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: 4px;
+}
+
+.dagNodeProgressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #b0b0b0, #c8c8c8);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: #f8fafc;
+  border-top: 1px solid #e8edf3;
+  font-size: 12px;
+  color: #64748b;
+}
+
+.footer svg {
+  color: #1677ff;
+}
+
+.parallelBadge {
+  margin-left: 8px;
+  font-size: 10px;
+  color: #9ca3af;
+  background: #f5f5f5;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+/* ============================================
+   Scrollbar
+   ============================================ */
+.timeline::-webkit-scrollbar {
+  width: 4px;
+}
+
+.timeline::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.timeline::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 2px;
+}
+
+/* ============================================
+   Git Tree Style
+   ============================================ */
+.gitTreeContainer {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px 16px;
+  font-family: 'SF Mono', 'Menlo', 'Monaco', 'Courier New', monospace;
+  font-size: 12px;
+}
+
+.gitTreeCompact {
+  padding: 8px 12px;
+}
+
+.gitNode {
+  display: flex;
+  align-items: center;
+  min-height: 28px;
+  position: relative;
+}
+
+.gitGraph {
+  position: relative;
+  width: 28px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Vertical line above node */
+.gitLineV {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 2px;
+  height: 50%;
+  background: #d1d5db;
+  transform: translateX(-50%);
+}
+
+/* Vertical line below node */
+.gitLineVBelow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2px;
+  height: 50%;
+  background: #d1d5db;
+  transform: translateX(-50%);
+}
+
+/* Branch start indicator */
+.gitBranchStart {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.gitBranchLine {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #f97316;
+}
+
+/* Node circle */
+.gitNodeCircle {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  position: relative;
+  z-index: 2;
+  background: #fff;
+  border: 2px solid #d1d5db;
+}
+
+/* Node colors - blue tones */
+.nodePending {
+  border-color: #1890ff;
+  color: #1890ff;
+}
+
+.nodeRunning {
+  border-color: #1890ff;
+  color: #1890ff;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.nodeCompleted {
+  border-color: #1890ff;
+  color: #1890ff;
+}
+
+.nodeThinking {
+  border-color: #1890ff;
+  color: #1890ff;
+}
+
+.nodeFailed {
+  border-color: #9ca3af;
+  color: #9ca3af;
+}
+
+.runningIcon {
+  font-size: 10px;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+/* Content area */
+.gitContent {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-left: 4px;
+  flex: 1;
+  min-width: 0;
+}
+
+.gitTime {
+  color: #6b7280;
+  font-size: 11px;
+  font-weight: 500;
+  min-width: 40px;
+}
+
+.gitLabel {
+  color: #1f2937;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.gitStatus {
+  color: #9ca3af;
+  font-size: 10px;
+  background: #f5f5f5;
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+
+/* ============================================
+   Tree Style - Clean Modern Design
+   ============================================ */
+.treeContainer {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 12px;
+  font-size: 13px;
+}
+
+.treeCompact {
+  padding: 8px 4px;
+}
+
+.treeNodeWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.treeNode {
+  display: flex;
+  align-items: center;
+  min-height: 36px;
+  position: relative;
+  padding: 4px 8px;
+  margin: 2px 0;
+  border-radius: 6px;
+  transition: background 0.15s ease;
+}
+
+.treeNode:hover {
+  background: #f8fafc;
+}
+
+/* Indentation for child nodes */
+.treeNode[data-level="1"] {
+  margin-left: 24px;
+}
+
+.treeNode[data-level="2"] {
+  margin-left: 48px;
+}
+
+.treeNode[data-level="3"] {
+  margin-left: 72px;
+}
+
+/* Expand/collapse button */
+.treeToggle {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: #94a3b8;
+  font-size: 10px;
+  padding: 0;
+  margin-right: 6px;
+  border-radius: 4px;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+}
+
+.treeToggle:hover {
+  color: #475569;
+  background: #e2e8f0;
+}
+
+.treeTogglePlaceholder {
+  width: 20px;
+  height: 20px;
+  margin-right: 6px;
+  flex-shrink: 0;
+}
+
+/* Node icon circle */
+.treeNodeCircle {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  position: relative;
+  flex-shrink: 0;
+  margin-right: 10px;
+  transition: all 0.2s ease;
+}
+
+/* Node colors - unified blue tones */
+.nodePending {
+  background: linear-gradient(135deg, #e6f4ff 0%, #f0f7ff 100%);
+  border: 1px solid #d6e4ff;
+  color: #1890ff;
+}
+
+.nodeRunning {
+  background: linear-gradient(135deg, #1677ff 0%, #4096ff 100%);
+  color: #fff;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.nodeCompleted {
+  background: linear-gradient(135deg, #e6f4ff 0%, #f0f7ff 100%);
+  border: 1px solid #d6e4ff;
+  color: #1890ff;
+}
+
+.nodeThinking {
+  background: linear-gradient(135deg, #e6f4ff 0%, #f0f7ff 100%);
+  border: 1px solid #d6e4ff;
+  color: #1890ff;
+}
+
+.nodeFailed {
+  background: linear-gradient(135deg, #f5f5f5 0%, #fafafa 100%);
+  border: 1px solid #e5e5e5;
+  color: #9ca3af;
+}
+
+/* Conversation node style */
+.nodeConversation {
+  background: linear-gradient(135deg, #e6f4ff 0%, #f0f7ff 100%);
+  border: 1px solid #d6e4ff;
+  color: #1890ff;
+}
+
+/* Answer node style */
+.nodeAnswer {
+  background: linear-gradient(135deg, #e6f4ff 0%, #f0f7ff 100%);
+  border: 1px solid #d6e4ff;
+  color: #1890ff;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 0 0 0 0 rgba(24, 144, 255, 0.3);
+  }
+  50% {
+    opacity: 0.85;
+    box-shadow: 0 0 0 4px rgba(24, 144, 255, 0.1);
+  }
+}
+
+/* Content area */
+.treeContent {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+
+.treeTime {
+  color: #94a3b8;
+  font-size: 11px;
+  font-weight: 500;
+  min-width: 36px;
+  font-family: 'SF Mono', 'Menlo', 'Monaco', 'Courier New', monospace;
+  flex-shrink: 0;
+}
+
+.treeLabel {
+  color: #334155;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 13px;
+}
+
+.treeStatus {
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  flex-shrink: 0;
+  font-weight: 500;
+}
+
+/* Pending - light gray */
+.treeStatusPending {
+  color: #9ca3af;
+  background: #fafafa;
+  border: 1px solid #e5e5e5;
+}
+
+/* Running - light gray-green */
+.treeStatusRunning {
+  color: #94a3b8;
+  background: #f8faf8;
+  border: 1px solid #e2e8e2;
+}
+
+/* Completed - light gray */
+.treeStatusCompleted {
+  color: #9ca3af;
+  background: #fafafa;
+  border: 1px solid #e5e7eb;
+}
+
+/* Failed - light gray-pink */
+.treeStatusFailed {
+  color: #bcaaac;
+  background: #fefafa;
+  border: 1px solid #fde8e8;
+}
+
+/* Children container with subtle left border */
+.treeChildren {
+  display: flex;
+  flex-direction: column;
+  margin-left: 12px;
+  padding-left: 12px;
+  border-left: 1px solid #e2e8f0;
+}
+
+/* Tree container scrollbar */
+.treeContainer::-webkit-scrollbar {
+  width: 6px;
+}
+
+.treeContainer::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.treeContainer::-webkit-scrollbar-thumb {
+  background: #e2e8f0;
+  border-radius: 3px;
+}
+
+.treeContainer::-webkit-scrollbar-thumb:hover {
+  background: #cbd5e1;
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+@media (max-width: 1200px) {
+  .container {
+    width: 260px;
+    min-width: 240px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .container {
+    display: none;
+  }
+}
+
+/* ============================================
+   Expand/Collapse
+   ============================================ */
+.stepRowWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.stepRowBg {
+  cursor: pointer;
+}
+
+.stepRowExpanded {
+  background-color: rgba(59, 130, 246, 0.05);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.stepRowExpanded:hover {
+  background-color: rgba(59, 130, 246, 0.08);
+}
+
+.expandIcon {
+  margin-left: auto;
+  font-size: 10px;
+  color: #9ca3af;
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.expandIconExpanded {
+  transform: rotate(180deg);
+  color: #666;
+}
+
+/* Detail panel */
+.stepDetailPanel {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 12px;
+  margin-top: 4px;
+  max-height: 300px;
+  overflow-y: auto;
+  animation: slideDown 0.2s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.detailGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12px;
+}
+
+.detailLabel {
+  color: #6b7280;
+  font-weight: 500;
+  margin-right: 8px;
+}
+
+.detailContent {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.detailPre {
+  margin: 0;
+  padding: 8px;
+  background: #f9fafb;
+  border-radius: 4px;
+  font-size: 11px;
+  font-family: 'SF Mono', 'Menlo', 'Monaco', monospace;
+  color: #374151;
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-height: 200px;
+  overflow-y: auto;
+}

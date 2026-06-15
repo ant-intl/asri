@@ -1,0 +1,11 @@
+.todoListFullScreen {
+  width: 100%;
+  max-width: 100%;
+  border: none;
+}
+
+@media (max-width: 1024px) {
+  .todoListFullScreen {
+    display: flex !important;
+  }
+}

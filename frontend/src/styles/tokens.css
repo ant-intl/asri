@@ -1,0 +1,320 @@
+/**
+ * ASRI Design Tokens
+ * Design token system - unified variables for colors, spacing, fonts, etc.
+ */
+
+:root {
+  /* ========================================
+     Color Palette - Primary Colors
+     ======================================== */
+  --color-primary-50: #e6f7ff;
+  --color-primary-100: #bae7ff;
+  --color-primary-200: #91d5ff;
+  --color-primary-300: #69c0ff;
+  --color-primary-400: #40a9ff;
+  --color-primary-500: #1677ff;
+  --color-primary-600: #0958d9;
+  --color-primary-700: #0050b3;
+  --color-primary-800: #003a8c;
+  --color-primary-900: #002766;
+
+  /* Success - success color */
+  --color-success-50: #f6ffed;
+  --color-success-100: #d9f7be;
+  --color-success-500: #52c41a;
+  --color-success-600: #389e0d;
+
+  /* Warning - warning color */
+  --color-warning-50: #fffbe6;
+  --color-warning-100: #fff1b8;
+  --color-warning-500: #faad14;
+  --color-warning-600: #d48806;
+
+  /* Error - error color */
+  --color-error-50: #fff1f0;
+  --color-error-100: #ffccc7;
+  --color-error-500: #ff4d4f;
+  --color-error-600: #cf1322;
+
+  /* Neutral - neutral colors */
+  --color-gray-0: #ffffff;
+  --color-gray-50: #fafafa;
+  --color-gray-100: #f5f5f5;
+  --color-gray-200: #e8e8e8;
+  --color-gray-300: #d9d9d9;
+  --color-gray-400: #bfbfbf;
+  --color-gray-500: #8c8c8c;
+  --color-gray-600: #595959;
+  --color-gray-700: #434343;
+  --color-gray-800: #262626;
+  --color-gray-900: #1a1a1a;
+  --color-gray-1000: #0d0d0d;
+
+  /* Dark Sidebar - dedicated dark sidebar colors */
+  --color-dark-bg: #0d0d0d;
+  --color-dark-bg-hover: rgba(255, 255, 255, 0.06);
+  --color-dark-bg-active: rgba(255, 255, 255, 0.1);
+  --color-dark-border: rgba(255, 255, 255, 0.08);
+  --color-dark-text-primary: rgba(255, 255, 255, 0.9);
+  --color-dark-text-secondary: rgba(255, 255, 255, 0.7);
+  --color-dark-text-tertiary: rgba(255, 255, 255, 0.4);
+
+  /* ========================================
+     Semantic Colors - semantic colors
+     ======================================== */
+  --color-bg-primary: var(--color-gray-0);
+  --color-bg-secondary: var(--color-gray-100);
+  --color-bg-tertiary: var(--color-gray-50);
+  --color-bg-dark: var(--color-dark-bg);
+
+  --color-text-primary: var(--color-gray-900);
+  --color-text-secondary: var(--color-gray-600);
+  --color-text-tertiary: var(--color-gray-500);
+  --color-text-disabled: var(--color-gray-400);
+  --color-text-inverse: var(--color-gray-0);
+
+  --color-border-default: var(--color-gray-200);
+  --color-border-divider: var(--color-gray-300);
+
+  /* ========================================
+     Typography - font system
+     Using a more modern and distinctive font combination
+     ======================================== */
+  --font-family-base: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-family-mono: 'JetBrains Mono', 'Monaco', 'Menlo', 'Consolas', monospace;
+
+  /* Using modular font scale with 1.25 ratio */
+  --font-size-xs: 0.75rem;    /* 12px */
+  --font-size-sm: 0.875rem;   /* 14px */
+  --font-size-base: 1rem;     /* 16px - minimum readable size */
+  --font-size-md: 1.125rem;   /* 18px */
+  --font-size-lg: 1.25rem;    /* 20px */
+  --font-size-xl: 1.5rem;     /* 24px */
+  --font-size-2xl: 1.875rem;  /* 30px */
+  --font-size-3xl: 2.25rem;   /* 36px */
+
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Line heights for different scenarios */
+  --line-height-tight: 1.2;     /* headings */
+  --line-height-snug: 1.375;    /* subheadings */
+  --line-height-normal: 1.5;    /* body text */
+  --line-height-relaxed: 1.7;   /* long text */
+
+  /* Letter spacing */
+  --letter-spacing-tight: -0.025em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.025em;
+
+  /* Text width constraints - improves readability */
+  --text-width-sm: 45ch;
+  --text-width-md: 65ch;
+  --text-width-lg: 75ch;
+
+  /* ========================================
+     Spacing - spacing system
+     ======================================== */
+  --space-0: 0;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+
+  /* ========================================
+     Border Radius - border radius
+     ======================================== */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-full: 9999px;
+
+  /* ========================================
+     Shadows - shadows
+     ======================================== */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --shadow-focus: 0 0 0 2px rgba(24, 144, 255, 0.2);
+
+  /* ========================================
+     Transitions - transition animations
+     ======================================== */
+  --transition-fast: 150ms ease;
+  --transition-normal: 200ms ease;
+  --transition-slow: 300ms ease;
+  --transition-ease-out: 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  /* ========================================
+     Z-Index - stacking layers
+     ======================================== */
+  --z-base: 0;
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-modal: 1000;
+  --z-toast: 1100;
+
+  /* ========================================
+     Layout - layout
+     ======================================== */
+  --sidebar-width: 240px;
+  --thinking-panel-width: 300px;
+  --header-height: 56px;
+  --input-max-width: 900px;
+}
+
+/* ========================================
+   Reduced Motion - reduced animation preference
+   ======================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ========================================
+   Focus Visible - focus indicator
+   ======================================== */
+:focus-visible {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
+}
+
+/* Focus styles for interactive elements like buttons */
+button:focus-visible,
+a:focus-visible,
+[role="button"]:focus-visible {
+  box-shadow: var(--shadow-focus);
+  outline: none;
+}
+
+/* ========================================
+   Typography Utilities - typography utility classes
+   ======================================== */
+
+/* Text hierarchy utility classes - semantically named */
+.text-caption {
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-normal);
+  color: var(--color-text-tertiary);
+}
+
+.text-body-sm {
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+}
+
+.text-body {
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
+}
+
+.text-body-lg {
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-relaxed);
+}
+
+.text-lead {
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-relaxed);
+  color: var(--color-text-secondary);
+}
+
+/* Heading hierarchy */
+.text-heading-xs {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.text-heading-sm {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-snug);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.text-heading-md {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-snug);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.text-heading-lg {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.text-heading-xl {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+/* Monospace font - for code, data */
+.font-mono {
+  font-family: var(--font-family-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Tabular numbers - for tables, prices, etc. */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Text width constraints - improves readability */
+.text-measure-sm {
+  max-width: var(--text-width-sm);
+}
+
+.text-measure-md {
+  max-width: var(--text-width-md);
+}
+
+.text-measure-lg {
+  max-width: var(--text-width-lg);
+}
+
+/* Text truncation */
+.text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.text-truncate-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.text-truncate-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Font weight utilities */
+.font-normal { font-weight: var(--font-weight-normal); }
+.font-medium { font-weight: var(--font-weight-medium); }
+.font-semibold { font-weight: var(--font-weight-semibold); }
+.font-bold { font-weight: var(--font-weight-bold); }

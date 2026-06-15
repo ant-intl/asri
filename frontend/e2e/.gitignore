@@ -1,0 +1,14 @@
+# Playwright test artifacts
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+
+# Screenshots and videos
+/screenshots/
+/videos/
+/traces/
+/artifacts/
+
+# Node modules
+node_modules/

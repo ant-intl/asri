@@ -1,0 +1,19 @@
+{
+  "stream_lines": [
+    "{\"model\":\"llama2\",\"created_at\":\"2024-03-05T12:00:00Z\",\"message\":{\"role\":\"assistant\",\"content\":\"Hello\"},\"done\":false}",
+    "{\"model\":\"llama2\",\"created_at\":\"2024-03-05T12:00:00Z\",\"message\":{\"role\":\"assistant\",\"content\":\"!\"},\"done\":false}",
+    "{\"model\":\"llama2\",\"created_at\":\"2024-03-05T12:00:00Z\",\"message\":{\"role\":\"assistant\",\"content\":\" How\"},\"done\":false}",
+    "{\"model\":\"llama2\",\"created_at\":\"2024-03-05T12:00:00Z\",\"message\":{\"role\":\"assistant\",\"content\":\" can\"},\"done\":false}",
+    "{\"model\":\"llama2\",\"created_at\":\"2024-03-05T12:00:00Z\",\"message\":{\"role\":\"assistant\",\"content\":\" I\"},\"done\":false}",
+    "{\"model\":\"llama2\",\"created_at\":\"2024-03-05T12:00:00Z\",\"message\":{\"role\":\"assistant\",\"content\":\" help\"},\"done\":false}",
+    "{\"model\":\"llama2\",\"created_at\":\"2024-03-05T12:00:00Z\",\"message\":{\"role\":\"assistant\",\"content\":\"?\"},\"done\":false}",
+    "{\"model\":\"llama2\",\"created_at\":\"2024-03-05T12:00:00Z\",\"message\":{\"role\":\"assistant\",\"content\":\"\"},\"done\":true,\"done_reason\":\"stop\",\"total_duration\":1234567890,\"prompt_eval_count\":12,\"eval_count\":9}"
+  ],
+  "status_code": 200,
+  "_meta": {
+    "recorded_at": "2024-03-05T12:00:00Z",
+    "provider": "ollama",
+    "endpoint": "/api/chat (stream)",
+    "note": "Ollama streaming response format (NDJSON). See: https://github.com/ollama/ollama/blob/main/docs/api.md#generate-a-chat-completion"
+  }
+}

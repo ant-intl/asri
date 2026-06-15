@@ -1,0 +1,36 @@
+.container {
+  padding: 24px;
+  background: #f5f7fa;
+  min-height: 100vh;
+}
+
+.header {
+  margin-bottom: 16px;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1f1f1f;
+  margin-bottom: 4px !important;
+}
+
+.subtitle {
+  font-size: 12px;
+  color: #999;
+  display: block;
+}
+
+.tabs {
+  background: transparent;
+}
+
+.tabLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tabIcon {
+  font-size: 16px;
+}

@@ -1,0 +1,144 @@
+.modal {
+  :global(.ant-modal-body) {
+    padding: 16px;
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding: 8px;
+  background: #fafafa;
+  border-radius: 8px;
+}
+
+.headerLabel {
+  font-weight: 600;
+  font-size: 14px;
+  color: #1890ff;
+}
+
+.headerArrow {
+  font-size: 16px;
+  color: #999;
+}
+
+.fieldSection {
+  margin-bottom: 16px;
+}
+
+.fieldHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  padding: 6px 12px;
+  background: #f5f5f5;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 13px;
+  color: #333;
+}
+
+.fieldTag {
+  font-size: 11px;
+  padding: 0 4px;
+  line-height: 18px;
+  border-radius: 3px;
+}
+
+.diffContainer {
+  display: flex;
+  border: 1px solid #e8e8e8;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.diffPanel {
+  flex: 1;
+  min-width: 0;
+  overflow-x: auto;
+}
+
+.diffPanelTitle {
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #666;
+  background: #fafafa;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.diffPanelLeft {
+  border-right: 1px solid #e8e8e8;
+}
+
+.diffContent {
+  font-family: 'SF Mono', 'Menlo', 'Monaco', 'Courier New', monospace;
+  font-size: 12px;
+  line-height: 20px;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.diffLine {
+  display: flex;
+  min-height: 20px;
+}
+
+.lineNumber {
+  min-width: 40px;
+  padding: 0 6px;
+  text-align: right;
+  color: #bbb;
+  background: #fafafa;
+  user-select: none;
+  flex-shrink: 0;
+  border-right: 1px solid #f0f0f0;
+}
+
+.lineContent {
+  flex: 1;
+  padding: 0 8px;
+  min-width: 0;
+}
+
+.lineAdded {
+  background: #e6ffed;
+}
+
+.lineAdded .lineNumber {
+  background: #d4f5d0;
+  color: #22863a;
+}
+
+.lineRemoved {
+  background: #ffeef0;
+}
+
+.lineRemoved .lineNumber {
+  background: #ffdce0;
+  color: #cb2431;
+}
+
+.lineUnchanged {
+  background: transparent;
+}
+
+.noChanges {
+  text-align: center;
+  padding: 12px;
+  color: #52c41a;
+  font-size: 13px;
+}
+
+.loading {
+  text-align: center;
+  padding: 40px;
+  color: #999;
+}

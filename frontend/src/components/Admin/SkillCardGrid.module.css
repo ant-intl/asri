@@ -1,0 +1,604 @@
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #f5f7fa;
+  position: relative;
+  overflow: hidden;
+}
+
+.container.drawerOpen .scrollArea {
+  padding-right: 436px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  background: #f5f7fa;
+  border-bottom: 1px solid #e8edf3;
+  flex-shrink: 0;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.dbToolTag {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 4px 12px;
+  font-size: 13px;
+}
+
+.dbToolSwitch {
+  margin-left: 4px;
+}
+
+.addBtn {
+  background: #1677ff;
+  border-radius: 6px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+  align-content: start;
+}
+
+.card {
+  border-radius: 12px;
+  border: 1px solid #e5e5e5;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  background: white;
+}
+
+.card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+  border-color: #d0d0d0;
+}
+
+.card :global(.ant-card-body) {
+  padding: 16px;
+}
+
+.card :global(.ant-card-actions) {
+  border-top: 1px solid #f0f0f0;
+  background: transparent;
+}
+
+.card :global(.ant-card-actions > li) {
+  margin: 0;
+}
+
+.cardHeader {
+  margin-bottom: 8px;
+}
+
+.cardTitleRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
+.cardTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a1a;
+  line-height: 1.4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+}
+
+.cardActions {
+  display: flex;
+  gap: 4px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.card:hover .cardActions {
+  opacity: 1;
+}
+
+.actionBtn {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6b7280;
+}
+
+.actionBtn:hover {
+  color: #1677ff;
+  background: rgba(22, 119, 255, 0.08);
+}
+
+.cardMeta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.statusTag {
+  font-size: 11px;
+  padding: 2px 8px;
+  margin: 0;
+}
+
+.timeText {
+  font-size: 12px;
+}
+
+.cardDescription {
+  font-size: 13px;
+  color: #6b7280;
+  line-height: 1.5;
+  min-height: 40px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.cardFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
+  width: 100%;
+}
+
+.enableSection {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.enableLabel {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.modalFooter {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border-divider);
+}
+
+.contentTextArea {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-relaxed);
+  border-radius: var(--radius-md);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.contentTextArea:focus {
+  border-color: var(--color-primary-500);
+  box-shadow: var(--shadow-focus);
+}
+
+/* Markdown preview in edit modal */
+.contentTabs :global(.ant-tabs-nav) {
+  margin-bottom: var(--space-4);
+}
+
+.contentTabs :global(.ant-tabs-tab) {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  padding: var(--space-2) var(--space-4);
+  transition: all var(--transition-fast);
+}
+
+.contentTabs :global(.ant-tabs-content) {
+  min-height: 320px;
+}
+
+.markdownPreview {
+  padding: var(--space-4) var(--space-4);
+  background: var(--color-bg-primary);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  min-height: 280px;
+  max-height: 400px;
+  overflow-y: auto;
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-relaxed);
+}
+
+.markdownPreview h1,
+.markdownPreview h2,
+.markdownPreview h3,
+.markdownPreview h4 {
+  margin-top: 16px;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.markdownPreview h1 { font-size: 1.5em; }
+.markdownPreview h2 { font-size: 1.3em; }
+.markdownPreview h3 { font-size: 1.15em; }
+
+.markdownPreview p {
+  margin-bottom: 12px;
+}
+
+.markdownPreview ul,
+.markdownPreview ol {
+  padding-left: 24px;
+  margin-bottom: 12px;
+}
+
+.markdownPreview li {
+  margin-bottom: 4px;
+}
+
+.markdownPreview code {
+  background: #f0f0f0;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-family: monospace;
+  font-size: 0.9em;
+}
+
+.markdownPreview pre {
+  background: #f0f0f0;
+  padding: 12px;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+.markdownPreview pre code {
+  background: none;
+  padding: 0;
+}
+
+.markdownPreview blockquote {
+  border-left: 3px solid #d9d9d9;
+  padding-left: 12px;
+  color: #666;
+  margin: 12px 0;
+}
+
+.markdownPreview table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 12px 0;
+}
+
+.markdownPreview th,
+.markdownPreview td {
+  border: 1px solid #e8e8e8;
+  padding: 8px 12px;
+  text-align: left;
+}
+
+.markdownPreview th {
+  background: #f5f5f5;
+  font-weight: 500;
+}
+
+/* Scrollbar */
+.scrollArea::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollArea::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollArea::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.scrollArea::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* AI Generate Drawer */
+.drawerTitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding-right: 32px;
+}
+
+.generateBtn {
+  background: #1677ff;
+  border-radius: 6px;
+}
+
+.drawerFooter {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.chatContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.chatMessages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 0;
+}
+
+.chatWelcome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  text-align: center;
+  gap: 16px;
+}
+
+.welcomeIcon {
+  font-size: 48px;
+  color: #1677ff;
+}
+
+/* ============================================
+   Chat Messages - Match ChatPage style
+   ============================================ */
+
+/* User Message - right-aligned bubble with avatar */
+.userRow {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 6px 0;
+}
+
+.userAvatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #1677ff;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.userBubble {
+  background: #f0f2f5;
+  border-radius: 16px 16px 4px 16px;
+  padding: 10px 16px;
+  max-width: 70%;
+}
+
+.userText {
+  margin: 0 !important;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #1a1a1a;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Assistant Message - with avatar on left */
+.assistantRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 6px 0;
+}
+
+.assistantAvatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #f0f5ff;
+  color: #1677ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+  margin-top: 2px;
+  border: 1px solid #d6e4ff;
+}
+
+.assistantBody {
+  flex: 1;
+  min-width: 0;
+}
+
+.assistantText {
+  margin: 0 !important;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #1a1a1a;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* File tags in messages */
+.fileTag,
+.urlTag {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+.userBubble .fileTag,
+.userBubble .urlTag {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.chatInputArea {
+  border-top: 1px solid #e8edf3;
+  padding-top: 16px;
+}
+
+.urlInputContainer {
+  margin-bottom: 12px;
+}
+
+.uploadedFiles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.inputRow {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.chatInput {
+  flex: 1;
+}
+
+/* Registry Skills Section (Knowledge Base) */
+.sectionTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sectionDivider {
+  margin: 8px 0 16px;
+  border-color: #e8edf3;
+}
+
+.scrollArea {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+}
+
+.registryCard {
+  border-radius: 12px;
+  border: 1px solid #d6e4ff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  background: #f0f5ff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.registryCard:hover {
+  box-shadow: 0 4px 12px rgba(22, 119, 255, 0.12);
+  transform: translateY(-2px);
+  border-color: #91caff;
+}
+
+.registryCard :global(.ant-card-body) {
+  padding: 16px;
+}
+
+.registryCardDescription {
+  font-size: 13px;
+  color: #6b7280;
+  line-height: 1.5;
+  min-height: 40px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.registryLabels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+/* KB Section */
+.kbSection {
+  margin-bottom: 0;
+}
+
+.kbHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.kbHeader .sectionTitle {
+  margin-bottom: 0;
+}
+
+.kbEmpty {
+  font-size: 13px;
+  color: #999;
+  padding: 16px 0;
+}
+
+.viewIcon {
+  color: #91caff;
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.registryCard:hover .viewIcon {
+  opacity: 1;
+}
+
+/* Registry Skill Detail Modal */
+.registryDetail {
+  padding: 4px 0;
+}
+
+.registryDetailMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.registryDetailDesc {
+  font-size: 14px;
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+.registryDetailContent {
+  margin-top: 4px;
+}

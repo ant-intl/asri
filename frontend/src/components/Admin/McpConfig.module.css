@@ -1,0 +1,479 @@
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #f5f7fa;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  background: #f5f7fa;
+  flex-shrink: 0;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.headerTitle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.backBtn {
+  padding: 4px 12px;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 !important;
+}
+
+.addBtn {
+  background: #1677ff;
+  border-radius: 6px;
+}
+
+.grid {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+  align-content: start;
+}
+
+.serverCard {
+  border-radius: 12px;
+  border: 1px solid #e5e5e5;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  background: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.serverCard:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+  border-color: #d0d0d0;
+}
+
+.serverCard :global(.ant-card-body) {
+  padding: 16px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.serverCard :global(.ant-card-actions) {
+  border-top: 1px solid #f0f0f0;
+  background: transparent;
+  flex-shrink: 0;
+}
+
+.serverCard :global(.ant-card-actions > li) {
+  margin: 0;
+}
+
+.cardTitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+
+.description {
+  font-size: 13px;
+  color: #6b7280;
+  line-height: 1.5;
+  min-height: 40px;
+  max-height: 40px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.commandSection,
+.argsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-height: 48px;
+}
+
+.label {
+  font-size: 12px;
+  color: #666;
+}
+
+.command {
+  background: #f5f5f5;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-family: 'Monaco', 'Menlo', monospace;
+  font-size: 13px;
+  color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.args {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 6px;
+  min-height: 24px;
+  overflow: hidden;
+  position: relative;
+}
+
+.args::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 40px;
+  background: linear-gradient(to right, transparent, white);
+  pointer-events: none;
+}
+
+.argTag {
+  margin: 0;
+  font-size: 12px;
+}
+
+.toolsPreview {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding-top: 8px;
+  border-top: 1px dashed #e5e5e5;
+  margin-top: 4px;
+}
+
+.toolsIcon {
+  color: #1677ff;
+  font-size: 14px;
+}
+
+.switchSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 12px;
+  border-top: 1px solid #f0f0f0;
+  margin-top: 4px;
+}
+
+.cardFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
+  width: 100%;
+}
+
+.actionBtn {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.serverCard:hover .actionBtn {
+  opacity: 1;
+}
+
+.enableSection {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.enableLabel {
+  font-size: 13px;
+  color: #666;
+}
+
+.modalFooter {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+/* Detail View Styles */
+.detailContent {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.infoCard {
+  border-radius: 12px;
+}
+
+.infoSection {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.infoItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.infoIcon {
+  font-size: 16px;
+  color: #1677ff;
+  margin-top: 2px;
+}
+
+.infoValue {
+  display: block;
+  margin-top: 4px;
+}
+
+.commandCode {
+  display: block;
+  background: #f5f5f5;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-family: 'Monaco', 'Menlo', monospace;
+  font-size: 13px;
+  color: #333;
+  margin-top: 4px;
+}
+
+.argsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.toolsCard {
+  border-radius: 12px;
+  flex: 1;
+}
+
+.toolItem {
+  padding: 16px 0 !important;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.toolItem:last-child {
+  border-bottom: none;
+}
+
+.toolContent {
+  width: 100%;
+}
+
+.toolHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.toolName {
+  font-size: 15px;
+  font-family: 'Monaco', 'Menlo', monospace;
+}
+
+.toolDesc {
+  display: block;
+  margin-bottom: 12px;
+}
+
+.toolParams {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.paramsLabel {
+  font-size: 12px;
+}
+
+.paramsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.paramTag {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  font-size: 12px;
+}
+
+.paramName {
+  font-family: 'Monaco', 'Menlo', monospace;
+  color: #1677ff;
+}
+
+.paramType {
+  color: #666;
+  font-size: 11px;
+}
+
+.paramRequired {
+  color: #ff4d4f;
+  font-weight: bold;
+}
+
+/* Scrollbar */
+.grid::-webkit-scrollbar,
+.detailContent::-webkit-scrollbar {
+  width: 6px;
+}
+
+.grid::-webkit-scrollbar-track,
+.detailContent::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.grid::-webkit-scrollbar-thumb,
+.detailContent::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.grid::-webkit-scrollbar-thumb:hover,
+.detailContent::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Mock Config */
+.mockPairCard {
+  margin-bottom: 16px;
+  background: #fafafa;
+}
+
+.mockPairHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.csvUploadSection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+  padding: 16px;
+  background: #f5f5f5;
+  border-radius: 8px;
+}
+
+.csvHint {
+  font-size: 12px;
+}
+
+.csvPreview {
+  margin-top: 16px;
+}
+
+.jsonPreview {
+  margin: 0;
+  padding: 8px;
+  background: #f5f5f5;
+  border-radius: 4px;
+  font-size: 12px;
+  max-height: 100px;
+  overflow: auto;
+}
+
+/* Execute Tool Styles */
+.toolInfo {
+  margin-bottom: 16px;
+}
+
+.paramInfo {
+  margin-bottom: 16px;
+  padding: 12px;
+  background: #f5f5f5;
+  border-radius: 8px;
+}
+
+.paramList {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.paramItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.executeResult {
+  margin-top: 16px;
+}
+
+.resultContent {
+  margin-top: 8px;
+  padding: 12px;
+  background: #f5f5f5;
+  border-radius: 8px;
+  max-height: 400px;
+  overflow: auto;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* Inline Execute Panel Styles */
+.executePanel {
+  margin-top: 16px;
+  padding: 20px;
+  background: #fafafa;
+  border: 1px solid #e8e8e8;
+  border-radius: 8px;
+}
+
+.executePanelHeader {
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e8e8e8;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}

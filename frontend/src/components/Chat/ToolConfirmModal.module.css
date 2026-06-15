@@ -1,0 +1,196 @@
+/* ── Inline Tool Confirmation Card ─────────────────────────── */
+
+.container {
+  margin: 12px 20px;
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid #e8edf3;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06), 0 1px 4px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  position: relative;
+}
+
+.containerVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Top accent bar — teal gradient */
+.accentBar {
+  height: 4px;
+  background: linear-gradient(90deg, #0D9488, #14B8A6);
+}
+
+.body {
+  padding: 16px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ── Header ────────────────────────────────────────────────── */
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.warningIcon {
+  color: #F97316;
+  font-size: 18px;
+}
+
+.title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+.countdownBadge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: #f0fdfa;
+  border: 1px solid #99f6e4;
+  border-radius: 20px;
+  padding: 2px 12px 2px 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #0f766e;
+}
+
+.clockIcon {
+  font-size: 14px;
+  color: #14B8A6;
+}
+
+.countdownText {
+  font-variant-numeric: tabular-nums;
+  min-width: 24px;
+  text-align: center;
+}
+
+/* ── Tool Name ─────────────────────────────────────────────── */
+
+.toolNameRow {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.toolLabel {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.toolValue {
+  font-size: 14px;
+  color: #1a1a2e;
+  font-family: 'SF Mono', 'Menlo', 'Monaco', monospace;
+}
+
+/* ── Arguments ─────────────────────────────────────────────── */
+
+.argsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.argsLabel {
+  margin-bottom: 0 !important;
+  font-size: 13px;
+}
+
+.argsCode {
+  margin: 0;
+  padding: 12px;
+  background: #f8fafc;
+  border: 1px solid #e8edf3;
+  border-radius: 8px;
+  font-size: 12px;
+  font-family: 'SF Mono', 'Menlo', 'Monaco', monospace;
+  line-height: 1.5;
+  max-height: 200px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  word-break: break-all;
+  color: #1e293b;
+}
+
+/* ── Progress Bar ──────────────────────────────────────────── */
+
+.progressTrack {
+  height: 4px;
+  background: #f0f0f0;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progressBar {
+  height: 100%;
+  background: linear-gradient(90deg, #14B8A6, #0D9488);
+  border-radius: 2px;
+  transition: width 1s linear;
+}
+
+/* ── Actions ───────────────────────────────────────────────── */
+
+.actions {
+  display: flex;
+  gap: 12px;
+}
+
+.approveBtn {
+  height: 44px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 15px;
+  border: none;
+  background: #0D9488;
+  box-shadow: 0 2px 6px rgba(13, 148, 136, 0.3);
+  transition: all 0.2s ease;
+}
+
+.approveBtn:hover:not(:disabled) {
+  background: #0f766e !important;
+  box-shadow: 0 4px 12px rgba(13, 148, 136, 0.4);
+  transform: translateY(-1px);
+}
+
+.approveBtn:disabled {
+  background: #99f6e4 !important;
+  color: #fff !important;
+}
+
+.denyBtn {
+  height: 44px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 15px;
+  transition: all 0.2s ease;
+}
+
+.denyBtn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 77, 79, 0.25);
+}
+
+/* ── Responded Hint ─────────────────────────────────────────── */
+
+.respondedHint {
+  text-align: center;
+  font-size: 13px;
+  color: #6b7280;
+  padding: 4px 0 0;
+}

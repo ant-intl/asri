@@ -1,0 +1,207 @@
+/* Container */
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #f5f7fa;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  background: #f5f7fa;
+  border-bottom: 1px solid #e8edf3;
+  flex-shrink: 0;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 !important;
+}
+
+.subtitle {
+  font-size: 12px;
+  color: #999;
+  display: block;
+  margin-top: 4px;
+}
+
+/* Card */
+.card {
+  margin: 24px;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  flex: 1;
+  overflow: auto;
+}
+
+/* Config Section */
+.configSection {
+  padding: 16px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+/* Prompt Section */
+.promptSection {
+  margin-bottom: 24px;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.sectionTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 0 !important;
+}
+
+.icon {
+  color: #1677ff;
+}
+
+.sectionDesc {
+  display: block;
+  margin-bottom: 16px;
+  font-size: 12px;
+}
+
+.toggleBtn {
+  font-size: 12px;
+  color: #666;
+}
+
+.toggleBtn:hover {
+  color: #1677ff;
+}
+
+/* Edit textarea */
+.editTextArea {
+  font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  border-radius: 8px;
+  border: 1px solid #d9d9d9;
+  background: #fafafa;
+}
+
+.editTextArea:focus {
+  border-color: #1677ff;
+  background: #fff;
+}
+
+/* Preview Container */
+.previewContainer {
+  border: 1px solid #e8edf3;
+  border-radius: 8px;
+  background: #fff;
+  padding: 16px;
+  min-height: 150px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+/* Markdown Preview Styles */
+.markdownPreview {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #333;
+}
+
+.markdownPreview h1 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #1a1a1a;
+  border-bottom: 1px solid #e8edf3;
+  padding-bottom: 8px;
+}
+
+.markdownPreview h2 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #333;
+}
+
+.markdownPreview h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #444;
+}
+
+.markdownPreview p {
+  margin-bottom: 12px;
+}
+
+.markdownPreview ul,
+.markdownPreview ol {
+  margin-bottom: 12px;
+  padding-left: 24px;
+}
+
+.markdownPreview li {
+  margin-bottom: 4px;
+}
+
+.markdownPreview code {
+  background: #f5f5f5;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'Monaco', 'Menlo', monospace;
+  font-size: 13px;
+}
+
+.markdownPreview pre {
+  background: #f5f5f5;
+  padding: 12px;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin-bottom: 12px;
+}
+
+.markdownPreview pre code {
+  background: none;
+  padding: 0;
+}
+
+.markdownPreview blockquote {
+  border-left: 4px solid #1677ff;
+  padding-left: 16px;
+  margin: 12px 0;
+  color: #666;
+  background: #f9f9f9;
+  padding: 8px 16px;
+  border-radius: 4px;
+}
+
+.markdownPreview strong {
+  font-weight: 600;
+}
+
+.markdownPreview hr {
+  border: none;
+  border-top: 1px solid #e8edf3;
+  margin: 16px 0;
+}
+
+.markdownPreview a {
+  color: #1677ff;
+  text-decoration: none;
+}
+
+.markdownPreview a:hover {
+  text-decoration: underline;
+}

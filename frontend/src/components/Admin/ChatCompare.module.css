@@ -1,0 +1,377 @@
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #f5f7fa;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 24px;
+  background: #f5f7fa;
+  border-bottom: 1px solid #e8edf3;
+  flex-shrink: 0;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a1a;
+  display: block;
+}
+
+.subtitle {
+  font-size: 12px;
+  color: #999;
+  display: block;
+  margin-top: 2px;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 12px 24px;
+  padding-bottom: 120px; /* Space for input area, aligned with Chat page */
+}
+
+/* Scrollbar */
+.content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.content::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.content::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+.empty {
+  margin-top: 100px;
+}
+
+.snapshotSelect {
+  width: 100%;
+}
+
+.optionContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.optionMeta {
+  font-size: 12px;
+}
+
+.compareGrid {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+}
+
+.compareCard {
+  flex: 1;
+  min-width: 440px;
+  min-height: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 4px 12px rgba(0, 0, 0, 0.04);
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.compareCard:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.compareCard :global(.ant-card-body) {
+  padding: 12px;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.compareCard :global(.ant-card-head) {
+  flex-shrink: 0;
+}
+
+.cardTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cardTitleText {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.badge :global(.ant-badge-count) {
+  background-color: #1677ff;
+}
+
+.removeBtn {
+  margin-left: auto;
+}
+
+.messageList {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  gap: 8px;
+}
+
+.snapshotInfo {
+  padding: 6px 10px;
+  background: #f8fafc;
+  border-radius: 8px;
+  flex-shrink: 0;
+  border: 1px solid #f1f5f9;
+}
+
+.infoRowCompact {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.infoText {
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.compactTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+/* ============================================
+   Messages Container - 消息列表区域
+   ============================================ */
+.messagesContainer {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px 2px;
+  width: 100%;
+}
+
+.messagesContainer::-webkit-scrollbar {
+  width: 5px;
+}
+
+.messagesContainer::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 4px 0;
+}
+
+.messagesContainer::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  background-clip: content-box;
+}
+
+.messagesContainer::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+  background-clip: content-box;
+}
+
+.loadingIndicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px;
+  color: #1677ff;
+  animation: pulseFade 2s ease-in-out infinite;
+}
+
+@keyframes pulseFade {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.confirmCardContainer {
+  flex-shrink: 0;
+  margin: 4px 0;
+}
+
+.loadingIcon {
+  font-size: 16px;
+}
+
+/* ============================================
+   共用输入框样式 - 与 Chat 页面保持一致
+   ============================================ */
+.inputContainer {
+  position: fixed;
+  bottom: 0;
+  left: 220px;
+  right: 20px;
+  z-index: 10;
+  padding: 16px 20px 24px;
+  background: linear-gradient(to top, #fff 0%, #fff 60%, transparent 100%);
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+}
+
+.inputContainer > * {
+  pointer-events: auto;
+  max-width: 800px;
+  width: 100%;
+}
+
+.inputWrapper {
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 14px;
+  padding: 12px 14px 10px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.05);
+  border: 2px solid #b0b8c4;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.inputWrapper:focus-within {
+  border-color: #1677ff;
+  box-shadow: 0 0 0 3px rgba(22, 119, 255, 0.15), 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.inputWrapperDisabled {
+  opacity: 0.7;
+  background: #fafafa;
+}
+
+.input {
+  border: none !important;
+  background: transparent !important;
+  resize: none;
+  font-size: 14px;
+  line-height: 1.6;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+
+.input:focus {
+  box-shadow: none !important;
+}
+
+.input :global(.ant-input) {
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+}
+
+.inputFooter {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.charCount {
+  font-size: 12px;
+  color: #9ca3af;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.charCountWarn {
+  color: #faad14;
+}
+
+.sendBtn {
+  width: 34px !important;
+  height: 34px !important;
+  border-radius: 10px !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px !important;
+}
+
+.strategyRow {
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ============================================
+   Mode Tags - 模式标签
+   ============================================ */
+.modeTags {
+  margin-bottom: 6px;
+  padding: 6px 8px;
+  background: linear-gradient(135deg, #f0f5ff 0%, #e6f7ff 100%);
+  border-radius: 8px;
+  border: 1px solid #d6e4ff;
+}
+
+.modeTag {
+  font-size: 12px;
+  margin-right: 4px;
+}
+
+/* ============================================
+   Stats Panel - 对比统计面板
+   ============================================ */
+.statsPanel {
+  display: flex;
+  gap: 8px;
+  padding: 8px 10px;
+  background: #f8fafc;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  margin-top: 6px;
+  flex-wrap: wrap;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-width: 60px;
+}
+
+.statLabel {
+  font-size: 11px;
+  color: #94a3b8;
+}
+
+.statValue {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1e293b;
+}

@@ -1,0 +1,457 @@
+.sider {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background: #fff !important;
+  border-right: 1px solid #e8edf3;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  transition: width 0.3s ease;
+  overflow: hidden;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.04);
+  height: 100vh;
+}
+
+.siderCollapsed {
+  width: 0 !important;
+  min-width: 0 !important;
+}
+
+.expandBtn {
+  position: fixed;
+  left: 16px;
+  top: 16px;
+  z-index: 99;
+  width: 36px !important;
+  height: 36px !important;
+  padding: 0 !important;
+  border-radius: 8px !important;
+  background: #fff !important;
+  border: 1px solid #e8edf3 !important;
+  color: #6b7280 !important;
+  transition: all 0.2s ease !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06) !important;
+}
+
+.expandBtn:hover {
+  background: #f0f5ff !important;
+  border-color: #1677ff !important;
+  color: #1677ff !important;
+}
+
+/* Header - Logo area */
+.header {
+  padding: 0 16px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  border-bottom: 1px solid #e8edf3;
+  flex-shrink: 0;
+  gap: 10px;
+}
+
+.logoIcon {
+  width: 30px;
+  height: 30px;
+  background: linear-gradient(135deg, #1677ff 0%, #4096ff 100%);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.logo {
+  color: #1a1a1a !important;
+  margin: 0 !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.2px;
+}
+
+.logoSubtitle {
+  font-size: 11px;
+  color: #9ca3af;
+  font-weight: 400;
+  line-height: 1;
+  margin-top: 1px;
+}
+
+.logoTextGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+/* Inline add button on Chat tab row */
+.inlineAddBtn {
+  margin-left: auto;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border-radius: 5px;
+  background: transparent;
+  border: 1px solid transparent;
+  color: #9ca3af;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+}
+
+.inlineAddBtn:hover {
+  background: #f0f5ff;
+  border-color: #d6e4ff;
+  color: #1677ff;
+}
+
+/* Navigation Menu */
+.menuContainer {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 8px 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.menuItem {
+  margin-bottom: 2px;
+  flex-shrink: 0;
+}
+
+/* Chat menu item can shrink when overflow */
+.chatMenuItem {
+  flex-shrink: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.menuHeader {
+  height: 42px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  position: relative;
+}
+
+.menuHeader:hover {
+  background: #f5f7fa;
+  color: #1677ff;
+}
+
+.menuItemActive > .menuHeader {
+  color: #1677ff;
+  background: #f0f5ff;
+}
+
+.menuItemActive > .menuHeader::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 20px;
+  background: #1677ff;
+  border-radius: 0 2px 2px 0;
+}
+
+.menuIcon {
+  font-size: 16px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6b7280;
+}
+
+.menuItemActive > .menuHeader .menuIcon {
+  color: #1677ff;
+}
+
+.menuLabel {
+  flex: 1;
+  font-size: 15px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.expandIcon {
+  font-size: 11px;
+  transition: transform 0.2s ease;
+  color: #9ca3af;
+}
+
+.expandIconRotated {
+  transform: rotate(90deg);
+}
+
+.menuContentWrapper {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.menuContentExpanded {
+  max-height: none;
+  overflow-y: visible;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.menuContentExpanded::-webkit-scrollbar {
+  width: 4px;
+}
+
+.menuContentExpanded::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.menuContentExpanded::-webkit-scrollbar-thumb {
+  background: #d9d9d9;
+  border-radius: 2px;
+}
+
+.menuContent {
+  padding: 2px 0 4px 0;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Chat Session List - scroll when menu container overflows */
+.chatSessionList {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.chatSessionList::-webkit-scrollbar {
+  width: 4px;
+}
+
+.chatSessionList::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.chatSessionList::-webkit-scrollbar-thumb {
+  background: #d9d9d9;
+  border-radius: 2px;
+}
+
+/* Session List */
+.sessionItem {
+  display: flex;
+  align-items: center;
+  padding: 0 16px 0 40px;
+  height: 36px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  margin-bottom: 1px;
+  color: #4b5563;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.sessionItem:hover {
+  background: #f5f7fa;
+  color: #374151;
+}
+
+.sessionItem.active {
+  background: #f0f5ff;
+  color: #1677ff;
+}
+
+.sessionIcon {
+  color: #9ca3af;
+  margin-right: 8px;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+.sessionItem.active .sessionIcon {
+  color: #1677ff;
+}
+
+.sessionTitle {
+  flex: 1;
+  color: inherit;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.deleteBtn {
+  color: #d1d5db !important;
+  opacity: 0;
+  transition: all 0.2s ease;
+  width: 22px !important;
+  height: 22px !important;
+  padding: 0 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px !important;
+}
+
+.sessionItem:hover .deleteBtn {
+  opacity: 1;
+}
+
+.deleteBtn:hover {
+  color: #ff4d4f !important;
+  background: #fff1f0 !important;
+}
+
+/* Placeholder */
+.placeholderText {
+  padding: 8px 16px 8px 40px;
+  font-size: 12px;
+  color: #9ca3af;
+  font-style: italic;
+}
+
+/* Sub Menu */
+.subMenu {
+  padding: 2px 0 4px 0;
+  max-height: none;
+  overflow-y: visible;
+}
+
+.subMenu::-webkit-scrollbar {
+  width: 4px;
+}
+
+.subMenu::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.subMenu::-webkit-scrollbar-thumb {
+  background: #d9d9d9;
+  border-radius: 2px;
+}
+
+.subMenuItem {
+  display: flex;
+  align-items: center;
+  padding: 0 16px 0 40px;
+  height: 36px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  margin-bottom: 1px;
+  color: #4b5563;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.subMenuItem:hover {
+  background: #f5f7fa;
+  color: #374151;
+}
+
+.subMenuItemActive {
+  background: #f0f5ff;
+  color: #1677ff;
+}
+
+.subMenuIcon {
+  color: #9ca3af;
+  margin-right: 8px;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+.subMenuItemActive .subMenuIcon {
+  color: #1677ff;
+}
+
+/* Empty State */
+.empty {
+  padding: 16px 0 16px 24px;
+}
+
+.empty :global(.ant-empty-description) {
+  color: #9ca3af;
+}
+
+/* Floating toggle button on sidebar right edge */
+.floatToggleBtn {
+  position: fixed;
+  left: 208px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 101;
+  width: 20px;
+  height: 44px;
+  background: #fff;
+  border: 1px solid #e8edf3;
+  border-left: none;
+  border-radius: 0 6px 6px 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9ca3af;
+  font-size: 11px;
+  transition: all 0.3s ease;
+  box-shadow: 2px 0 6px rgba(0, 0, 0, 0.06);
+  padding: 0;
+}
+
+.floatToggleBtn:hover {
+  color: #1677ff;
+  background: #f0f5ff;
+  border-color: #d6e4ff;
+}
+
+.floatToggleBtnCollapsed {
+  left: 0;
+  border-left: 1px solid #e8edf3;
+  border-radius: 0 6px 6px 0;
+}
+
+.floatToggleIcon {
+  transition: transform 0.3s ease;
+}
+
+.floatToggleIconRotated {
+  transform: rotate(180deg);
+}
+
+/* Scrollbar */
+.menuContainer::-webkit-scrollbar {
+  width: 4px;
+}
+
+.menuContainer::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.menuContainer::-webkit-scrollbar-thumb {
+  background: #e5e7eb;
+  border-radius: 2px;
+}
+
+.menuContainer::-webkit-scrollbar-thumb:hover {
+  background: #d1d5db;
+}

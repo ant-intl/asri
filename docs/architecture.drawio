@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="drawio" version="26.0.0">
+  <diagram name="ASRI Architecture">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- ===== TITLE ===== -->
+        <mxCell id="title" value="ASRI System Architecture" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=22;fontStyle=1;fontColor=#1a1a2e;" vertex="1" parent="1">
+          <mxGeometry x="377" y="20" width="900" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- ===== CLIENT LAYER ===== -->
+        <mxCell id="client_bg" value="Client Layer" style="swimlane;startSize=30;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;fontStyle=1;fontColor=#23406e;horizontal=1;" vertex="1" parent="1">
+          <mxGeometry x="377" y="80" width="900" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="client_react" value="React 19 SPA&#xa;+ Ant Design 6" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b3d4f7;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="client_bg">
+          <mxGeometry x="150" y="28" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="client_ws" value="WebSocket Client" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b3d4f7;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="client_bg">
+          <mxGeometry x="370" y="28" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="client_pg" value="Playground UI&#xa;(Compare Mode)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b3d4f7;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="client_bg">
+          <mxGeometry x="590" y="28" width="160" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- ===== API LAYER ===== -->
+        <mxCell id="api_bg" value="API Layer" style="swimlane;startSize=30;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=13;fontStyle=1;fontColor=#7a4000;" vertex="1" parent="1">
+          <mxGeometry x="377" y="210" width="900" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="api_http" value="HTTP Endpoints&#xa;(Chat / Session / Message&#xa;/ Provider Config)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffd699;strokeColor=#d79b00;fontSize=11;" vertex="1" parent="api_bg">
+          <mxGeometry x="100" y="22" width="200" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="api_ws" value="WebSocket Handler&#xa;(chat_consumer.py)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffd699;strokeColor=#d79b00;fontSize=11;" vertex="1" parent="api_bg">
+          <mxGeometry x="350" y="22" width="200" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="api_auth" value="Bearer Token Auth&#xa;TenantMiddleware" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffd699;strokeColor=#d79b00;fontSize=11;" vertex="1" parent="api_bg">
+          <mxGeometry x="600" y="22" width="200" height="44" as="geometry" />
+        </mxCell>
+
+        <!-- ===== SERVICE LAYER ===== -->
+        <mxCell id="svc_bg" value="Service Layer" style="swimlane;startSize=30;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;fontStyle=1;fontColor=#1a4d1a;" vertex="1" parent="1">
+          <mxGeometry x="377" y="340" width="900" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="svc_chat" value="ChatService&#xa;(chat_service.py)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#aad4a8;strokeColor=#82b366;fontSize=11;" vertex="1" parent="svc_bg">
+          <mxGeometry x="100" y="22" width="180" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="svc_session" value="SessionService" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#aad4a8;strokeColor=#82b366;fontSize=11;" vertex="1" parent="svc_bg">
+          <mxGeometry x="360" y="22" width="180" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="svc_wsvc" value="WebSocketService" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#aad4a8;strokeColor=#82b366;fontSize=11;" vertex="1" parent="svc_bg">
+          <mxGeometry x="620" y="22" width="180" height="44" as="geometry" />
+        </mxCell>
+
+        <!-- ===== CORE LAYER (Interleave Engine) ===== -->
+        <mxCell id="core_bg" value="Core Layer — Interleave Engine" style="swimlane;startSize=34;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=14;fontStyle=1;fontColor=#4a1570;" vertex="1" parent="1">
+          <mxGeometry x="377" y="470" width="900" height="200" as="geometry" />
+        </mxCell>
+        <!-- ChatAgent box -->
+        <mxCell id="core_agent" value="ChatAgent&#xa;(Pipeline Frame Architecture)&#xa;AgentContext / ActionExecutor" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d0b8e6;strokeColor=#9673a6;fontSize=11;fontStyle=1;" vertex="1" parent="core_bg">
+          <mxGeometry x="330" y="38" width="240" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Three core features -->
+        <mxCell id="feat1" value="🔀 Parallel Streaming Tool Use&#xa;AsyncExecutorProcessor&#xa;Parallel tool_calls" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;fontStyle=1;" vertex="1" parent="core_bg">
+          <mxGeometry x="30" y="118" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="feat2" value="🧠 Interleaved Thinking And Answer&#xa;FullDuplexLLMProcessor&#xa;+ StreamingTagFilter" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=1;" vertex="1" parent="core_bg">
+          <mxGeometry x="350" y="118" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="feat3" value="⚡ Adaptive Interrupt&#xa;interrupt_event&#xa;+ finally context save" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontStyle=1;" vertex="1" parent="core_bg">
+          <mxGeometry x="670" y="118" width="200" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Arrows from ChatAgent to features -->
+        <mxCell id="e_agent_f1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#9673a6;strokeWidth=2;" edge="1" parent="core_bg" source="core_agent" target="feat1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_agent_f2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#9673a6;strokeWidth=2;" edge="1" parent="core_bg" source="core_agent" target="feat2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_agent_f3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#9673a6;strokeWidth=2;" edge="1" parent="core_bg" source="core_agent" target="feat3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ===== INTEGRATION LAYER — three columns ===== -->
+        <!-- LLM Layer -->
+        <mxCell id="llm_bg" value="LLM Layer" style="swimlane;startSize=28;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;fontStyle=1;fontColor=#23406e;" vertex="1" parent="1">
+          <mxGeometry x="377" y="730" width="240" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="llm_openai" value="OpenAIProvider" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b3d4f7;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="llm_bg">
+          <mxGeometry x="20" y="36" width="200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="llm_ollama" value="OllamaProvider" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b3d4f7;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="llm_bg">
+          <mxGeometry x="20" y="72" width="200" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="llm_custom" value="CustomProvider (OpenAI-compat)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b3d4f7;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="llm_bg">
+          <mxGeometry x="20" y="106" width="200" height="28" as="geometry" />
+        </mxCell>
+
+        <!-- RAG/Skill/Tool Layer -->
+        <mxCell id="rag_bg" value="RAG / Skill / Tool Layer" style="swimlane;startSize=28;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=12;fontStyle=1;fontColor=#7a4000;" vertex="1" parent="1">
+          <mxGeometry x="687" y="730" width="240" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="rag_http" value="HTTP RAG Provider" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffd699;strokeColor=#d79b00;fontSize=11;" vertex="1" parent="rag_bg">
+          <mxGeometry x="20" y="36" width="200" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="rag_faq" value="FAQ RAG Provider" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffd699;strokeColor=#d79b00;fontSize=11;" vertex="1" parent="rag_bg">
+          <mxGeometry x="20" y="72" width="200" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="rag_skill" value="Skill Registry / Tool Registry" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffd699;strokeColor=#d79b00;fontSize=11;" vertex="1" parent="rag_bg">
+          <mxGeometry x="20" y="104" width="200" height="28" as="geometry" />
+        </mxCell>
+
+        <!-- Memory Layer -->
+        <mxCell id="mem_bg" value="Memory Layer" style="swimlane;startSize=28;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;fontStyle=1;fontColor=#1a4d1a;" vertex="1" parent="1">
+          <mxGeometry x="997" y="730" width="240" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="mem_conv" value="Conversation Memory" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#aad4a8;strokeColor=#82b366;fontSize=11;" vertex="1" parent="mem_bg">
+          <mxGeometry x="20" y="36" width="200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="mem_sum" value="Summary Memory" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#aad4a8;strokeColor=#82b366;fontSize=11;" vertex="1" parent="mem_bg">
+          <mxGeometry x="20" y="74" width="200" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- ===== PERSISTENCE LAYER ===== -->
+        <mxCell id="db_bg" value="Persistence Layer (Django ORM + MySQL)" style="swimlane;startSize=30;fillColor=#f5f5f5;strokeColor=#666666;fontSize=13;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="377" y="940" width="900" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="db_session" value="ChatSession" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#d6d6d6;strokeColor=#666666;fontSize=11;" vertex="1" parent="db_bg">
+          <mxGeometry x="50" y="20" width="120" height="46" as="geometry" />
+        </mxCell>
+        <mxCell id="db_msg" value="Message" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#d6d6d6;strokeColor=#666666;fontSize=11;" vertex="1" parent="db_bg">
+          <mxGeometry x="210" y="20" width="120" height="46" as="geometry" />
+        </mxCell>
+        <mxCell id="db_llmprov" value="LLMProvider" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#d6d6d6;strokeColor=#666666;fontSize=11;" vertex="1" parent="db_bg">
+          <mxGeometry x="370" y="20" width="120" height="46" as="geometry" />
+        </mxCell>
+        <mxCell id="db_prompt" value="PromptTemplate" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#d6d6d6;strokeColor=#666666;fontSize=11;" vertex="1" parent="db_bg">
+          <mxGeometry x="530" y="20" width="120" height="46" as="geometry" />
+        </mxCell>
+        <mxCell id="db_tenant" value="Tenant" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#d6d6d6;strokeColor=#666666;fontSize=11;" vertex="1" parent="db_bg">
+          <mxGeometry x="690" y="20" width="120" height="46" as="geometry" />
+        </mxCell>
+
+        <!-- ===== INTER-LAYER ARROWS ===== -->
+        <!-- Client -> API -->
+        <mxCell id="e1" value="WebSocket / HTTP" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#6c8ebf;strokeWidth=2;fontSize=10;" edge="1" parent="1" source="client_bg" target="api_bg">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <!-- API -> Service -->
+        <mxCell id="e2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#d79b00;strokeWidth=2;" edge="1" parent="1" source="api_bg" target="svc_bg">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <!-- Service -> Core -->
+        <mxCell id="e3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#82b366;strokeWidth=2;" edge="1" parent="1" source="svc_bg" target="core_bg">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <!-- Core -> LLM -->
+        <mxCell id="e4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#9673a6;strokeWidth=2;exitX=0.25;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="core_bg" target="llm_bg">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <!-- Core -> RAG -->
+        <mxCell id="e5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#9673a6;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="core_bg" target="rag_bg">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <!-- Core -> Memory -->
+        <mxCell id="e6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#9673a6;strokeWidth=2;exitX=0.75;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="core_bg" target="mem_bg">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <!-- LLM/RAG/Mem -> Persistence -->
+        <mxCell id="e7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;strokeWidth=2;" edge="1" parent="1" source="llm_bg" target="db_bg">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;strokeWidth=2;" edge="1" parent="1" source="rag_bg" target="db_bg">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;strokeWidth=2;" edge="1" parent="1" source="mem_bg" target="db_bg">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

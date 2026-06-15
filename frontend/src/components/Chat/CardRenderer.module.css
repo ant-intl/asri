@@ -1,0 +1,438 @@
+/* ================================================================
+   Action Card (existing, backward compatible)
+   ================================================================ */
+
+.actionCard {
+  background: #f5f7fa;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-top: 8px;
+}
+
+.actionText {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 12px;
+  white-space: pre-wrap;
+}
+
+.actionButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.actionButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 14px;
+}
+
+.actionIcon {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+}
+
+/* ================================================================
+   Generic Card — Stack Layout
+   ================================================================ */
+
+.stackContainer {
+  background: #fff;
+  border: 1px solid #e8e8e8;
+  border-radius: 12px;
+  padding: 16px;
+  margin-top: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Theme top accent bar */
+.stackContainer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: transparent;
+}
+
+.stackContainer[data-theme="hotel"]::before {
+  background: linear-gradient(90deg, #ff922b, #fd7e14);
+}
+
+.stackContainer[data-theme="train"]::before {
+  background: linear-gradient(90deg, #339af0, #228be6);
+}
+
+/* ================================================================
+   Generic Card — Carousel Layout
+   ================================================================ */
+
+.carouselContainer {
+  background: #fff;
+  border: 1px solid #e8e8e8;
+  border-radius: 12px;
+  padding: 16px;
+  margin-top: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  position: relative;
+  overflow: hidden;
+}
+
+.carouselViewport {
+  overflow: hidden;
+  width: 100%;
+}
+
+.carouselTrack {
+  display: flex;
+  transition: transform 0.3s ease;
+  width: 100%;
+}
+
+.carouselSlide {
+  flex: 0 0 100%;
+  width: 100%;
+  min-width: 100%;
+}
+
+.slidePanel {
+  padding: 0 4px;
+}
+
+/* Carousel Navigation Arrows */
+.carouselArrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+  font-size: 12px;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.carouselArrow:hover {
+  opacity: 1;
+}
+
+.carouselArrowLeft {
+  left: 8px;
+}
+
+.carouselArrowRight {
+  right: 8px;
+}
+
+/* Carousel Dots */
+.carouselDots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.carouselDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: #d9d9d9;
+  cursor: pointer;
+  transition: background 0.2s;
+  padding: 0;
+}
+
+.carouselDotActive {
+  background: #1890ff;
+}
+
+/* Card Footer */
+.cardFooter {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #f0f0f0;
+}
+
+/* ================================================================
+   Generic Components
+   ================================================================ */
+
+/* Header */
+.headerComponent {
+  margin-bottom: 12px;
+  padding-left: 0;
+  transition: padding-left 0.2s;
+}
+
+.headerComponent[data-theme="hotel"],
+.headerComponent[data-theme="train"] {
+  padding-left: 12px;
+  border-left: 3px solid transparent;
+}
+
+.headerComponent[data-theme="hotel"] {
+  border-left-color: #ff922b;
+}
+
+.headerComponent[data-theme="train"] {
+  border-left-color: #339af0;
+}
+
+.headerTitle {
+  font-size: 17px;
+  font-weight: 700;
+  color: #1a1a1a;
+  line-height: 1.4;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.headerIcon {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.headerSubtitle {
+  font-size: 13px;
+  color: #888;
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+/* Text */
+.textComponent {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #333;
+  margin-bottom: 12px;
+}
+
+.textComponent :global(p) {
+  margin: 0 0 8px 0;
+}
+
+.textComponent :global(p:last-child) {
+  margin-bottom: 0;
+}
+
+.textComponent :global(h2) {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 12px 0 6px 0;
+}
+
+.textComponent :global(ul) {
+  margin: 4px 0;
+  padding-left: 20px;
+}
+
+.textComponent :global(li) {
+  margin-bottom: 2px;
+}
+
+.textMuted {
+  color: #666;
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 10px 14px;
+  border-left: 3px solid #d0d0d0;
+  font-size: 13px;
+}
+
+/* List */
+.listComponent {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #333;
+  margin-bottom: 12px;
+  padding-left: 20px;
+}
+
+.listComponent li {
+  margin-bottom: 4px;
+}
+
+/* Key-Value */
+.keyValueComponent {
+  margin-bottom: 12px;
+  background: #fafbfc;
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+
+.keyValueRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 5px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.keyValueRow:last-child {
+  border-bottom: none;
+}
+
+.keyValueKey {
+  font-size: 12px;
+  color: #888;
+  flex-shrink: 0;
+  margin-right: 12px;
+}
+
+.keyValueValue {
+  font-size: 13px;
+  color: #1a1a1a;
+  text-align: right;
+  word-break: break-all;
+  font-weight: 500;
+}
+
+/* Tag */
+.tagComponent {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.tagItem {
+  font-size: 12px;
+  padding: 2px 8px;
+}
+
+/* Button */
+.buttonComponent {
+  display: inline-flex !important;
+  margin-bottom: 8px;
+  margin-right: 8px;
+  border-radius: 6px !important;
+  font-weight: 500;
+}
+
+.buttonSelected {
+  background: #52c41a !important;
+  border-color: #52c41a !important;
+  color: #fff !important;
+}
+
+.buttonUnselected {
+  background: #fff !important;
+  border-color: #d9d9d9 !important;
+  color: #333 !important;
+}
+
+.buttonUnselected:hover {
+  border-color: #52c41a !important;
+  color: #52c41a !important;
+}
+
+.buttonCheckIcon {
+  font-size: 12px;
+  margin-right: 4px;
+}
+
+/* Field value tag (shown next to label when selected) */
+.fieldValueTag {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 1px 8px;
+  background: #f6ffed;
+  border: 1px solid #b7eb8f;
+  border-radius: 10px;
+  font-size: 12px;
+  color: #52c41a;
+  font-weight: 500;
+}
+
+/* Image */
+.imageComponent {
+  margin-bottom: 12px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.cardImage {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Date Picker */
+.datePickerComponent {
+  margin-bottom: 12px;
+}
+
+.datePickerLabel {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 6px;
+}
+
+.datePickerInput {
+  width: 100%;
+}
+
+/* Select */
+.selectComponent {
+  margin-bottom: 12px;
+}
+
+.selectLabel {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 6px;
+}
+
+.selectInput {
+  width: 100%;
+}
+
+/* Input */
+.inputComponent {
+  margin-bottom: 12px;
+}
+
+.inputLabel {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 6px;
+}
+
+.inputSearch {
+  width: 100%;
+}
+
+/* Divider */
+.dividerComponent {
+  height: 1px;
+  background: #f0f0f0;
+  margin: 12px 0;
+}
+
+/* Submit Button */
+.submitButton {
+  margin-top: 8px;
+  border-radius: 8px !important;
+  font-weight: 600;
+  height: 42px;
+}

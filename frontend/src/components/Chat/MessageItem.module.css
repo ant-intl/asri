@@ -1,0 +1,615 @@
+/* ============================================
+   User Message - right-aligned bubble with avatar
+   ============================================ */
+.userRow {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 6px 0;
+}
+
+.userAvatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #1677ff;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.userBubble {
+  background: #f0f5ff;
+  border-radius: 16px 16px 4px 16px;
+  padding: 10px 16px;
+  max-width: 70%;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.userText {
+  margin: 0 !important;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #1a1a1a;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* ============================================
+   Assistant Message - with avatar on left
+   ============================================ */
+.assistantRow {
+  display: flex;
+  align-items: flex-start;
+  padding: 6px 0;
+  padding-left: 42px; /* Space for avatar (32px + 10px gap) */
+  position: relative;
+}
+
+.assistantAvatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #f0f5ff;
+  color: #1677ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+  margin-top: 2px;
+  border: 1px solid #d6e4ff;
+  position: absolute;
+  left: 0;
+  top: 6px;
+}
+
+.assistantBody {
+  flex: 1;
+  min-width: 0;
+}
+
+.assistantText {
+  margin: 0 !important;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #1a1a1a;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* ============================================
+   Trace List - stacked card rows
+   ============================================ */
+.traceList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Loading state when all trace items are filtered out */
+.traceLoading {
+  padding: 10px 14px;
+  font-size: 13px;
+  color: #9ca3af;
+  font-style: italic;
+}
+
+/* Each trace row - the card-row style from reference image */
+.traceRow {
+  border-radius: 10px;
+  overflow: hidden;
+  animation: rowIn 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition: box-shadow 0.2s ease;
+}
+
+.traceRow:hover {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+@keyframes rowIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.traceRow:nth-child(1) { animation-delay: 0ms; }
+.traceRow:nth-child(2) { animation-delay: 40ms; }
+.traceRow:nth-child(3) { animation-delay: 80ms; }
+.traceRow:nth-child(4) { animation-delay: 120ms; }
+.traceRow:nth-child(5) { animation-delay: 160ms; }
+.traceRow:nth-child(6) { animation-delay: 200ms; }
+.traceRow:nth-child(7) { animation-delay: 240ms; }
+.traceRow:nth-child(8) { animation-delay: 280ms; }
+
+.traceRowHeader {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 10px 14px;
+  background: #f8fafc;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+  font-family: inherit;
+  text-align: left;
+  gap: 8px;
+}
+
+.traceRowHeader:active {
+  transform: scale(0.995);
+}
+
+.traceRowHeader:hover {
+  background: #edeef0;
+}
+
+.traceRowHeaderActive {
+  background: #e2e8f0;
+  border-radius: 10px 10px 0 0;
+}
+
+.traceRowIcon {
+  font-size: 14px;
+  color: #6b7280;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.traceRowLabel {
+  flex: 1;
+  font-size: 13px;
+  font-weight: 500;
+  color: #374151;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.traceRowLatency {
+  font-family: 'JetBrains Mono', 'Monaco', 'Menlo', monospace;
+  font-size: 11px;
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+  color: #9ca3af;
+  flex-shrink: 0;
+}
+
+.latencyFast {
+  color: #9ca3af;
+}
+
+.latencyMedium {
+  color: #9ca3af;
+}
+
+.latencySlow {
+  color: #9ca3af;
+}
+
+.traceRowChevron {
+  font-size: 11px;
+  color: #9ca3af;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0;
+}
+
+.traceRowChevronOpen {
+  transform: rotate(180deg);
+}
+
+/* ============================================
+   Collapsible Content
+   ============================================ */
+.traceRowContent {
+  overflow: hidden;
+  transition: max-height 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  background: #f5f6f7;
+  border-radius: 0 0 8px 8px;
+}
+
+.traceRowContentInner {
+  padding: 12px 16px 14px;
+  border-top: 1px solid #e2e8f0;
+}
+
+/* Thinking text - centered alignment */
+.thinkingContent {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.thinkingPara {
+  margin: 0;
+  font-size: 13px;
+  color: #64748b;
+  font-style: italic;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Tool content: Input/Output cards */
+.toolContent {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px 14px;
+}
+
+.codeCard {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.codeCardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: #fff;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.codeCardTitle {
+  font-size: 13px;
+  font-weight: 500;
+  color: #374151;
+}
+
+.copyBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #9ca3af;
+  font-size: 14px;
+  padding: 2px 4px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  transition: color 0.15s, background 0.15s;
+}
+
+.copyBtn:hover {
+  color: #1677ff;
+  background: #f0f5ff;
+}
+
+/* Tracetext (fallback) */
+.traceText {
+  font-size: 13px;
+  color: #6b7280;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* ============================================
+   Answer Block - rendered answer content
+   ============================================ */
+.answerBlock {
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: transparent;
+}
+
+.intermediateAnswer {
+  background: #f0f7ff;
+  border: 1px solid #d6e4ff;
+  border-radius: 10px;
+  margin-bottom: 8px;
+}
+
+.intermediateAnswerLabel {
+  font-size: 11px;
+  color: #1677ff;
+  font-weight: 500;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Tool detail */
+.traceDetail {
+  font-size: 13px;
+}
+
+/* Code block */
+.codeBlock {
+  background: #fafafa;
+  border: none;
+  padding: 12px 14px;
+  border-radius: 0;
+  margin: 0;
+  overflow-x: auto;
+  font-size: 13px;
+  font-family: 'JetBrains Mono', 'Monaco', 'Menlo', monospace;
+  line-height: 1.7;
+  color: #374151;
+  max-height: 300px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+/* JSON syntax highlight */
+.jsonKey {
+  color: #5b7fa6;
+}
+
+.jsonString {
+  color: #8a6240;
+}
+
+.codeBlock::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.codeBlock::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.codeBlock::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 2px;
+}
+
+/* ============================================
+   Markdown Body - rendered markdown content
+   ============================================ */
+.markdownBody {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #1a1a1a;
+  word-break: break-word;
+}
+
+.markdownBody p {
+  margin: 0 0 8px;
+}
+
+.markdownBody p:last-child {
+  margin-bottom: 0;
+}
+
+.markdownBody h1,
+.markdownBody h2,
+.markdownBody h3,
+.markdownBody h4,
+.markdownBody h5,
+.markdownBody h6 {
+  margin: 16px 0 8px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #111827;
+}
+
+.markdownBody h1 { font-size: 1.5em; }
+.markdownBody h2 { font-size: 1.25em; }
+.markdownBody h3 { font-size: 1.1em; }
+
+.markdownBody ul,
+.markdownBody ol {
+  margin: 6px 0 10px;
+  padding-left: 22px;
+}
+
+.markdownBody li {
+  margin-bottom: 4px;
+}
+
+.markdownBody blockquote {
+  margin: 8px 0;
+  padding: 6px 12px;
+  border-left: 3px solid #d1d5db;
+  color: #6b7280;
+  background: #f9fafb;
+  border-radius: 0 4px 4px 0;
+}
+
+.markdownBody code {
+  font-family: 'JetBrains Mono', 'Monaco', 'Menlo', monospace;
+  font-size: 12px;
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  padding: 1px 5px;
+  color: #1677ff;
+}
+
+.markdownBody pre {
+  background: #1e293b;
+  border-radius: 8px;
+  padding: 14px 16px;
+  overflow-x: auto;
+  margin: 10px 0;
+}
+
+.markdownBody pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  color: #e2e8f0;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.markdownBody table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 10px 0;
+  font-size: 13px;
+}
+
+.markdownBody th,
+.markdownBody td {
+  border: 1px solid #e5e7eb;
+  padding: 7px 12px;
+  text-align: left;
+}
+
+.markdownBody th {
+  background: #f9fafb;
+  font-weight: 600;
+  color: #374151;
+}
+
+.markdownBody tr:nth-child(even) {
+  background: #fafafa;
+}
+
+.markdownBody a {
+  color: #1677ff;
+  text-decoration: none;
+}
+
+.markdownBody a:hover {
+  text-decoration: underline;
+}
+
+.markdownBody hr {
+  border: none;
+  border-top: 1px solid #e5e7eb;
+  margin: 12px 0;
+}
+
+.markdownBody strong {
+  font-weight: 600;
+  color: #111827;
+}
+
+.markdownBody em {
+  font-style: italic;
+  color: #4b5563;
+}
+
+/* Images in markdown - constrained size with click-to-preview */
+.markdownImage {
+  max-width: 100%;
+  max-height: 360px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  border: 1px solid #f0f0f0;
+  cursor: pointer;
+  display: inline-block;
+  margin: 8px 0;
+}
+
+
+/* Answer content - rendered directly without collapsible card */
+.answerContent {
+  padding: 12px 16px;
+  background: #fff;
+  border-radius: 8px;
+  margin: 8px 0;
+}
+
+.answerContent :global(.markdown-body) {
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.answerContent :global(.markdown-body p) {
+  margin: 0 0 12px;
+}
+
+.answerContent :global(.markdown-body p:last-child) {
+  margin-bottom: 0;
+}
+
+.answerText {
+  margin: 0 !important;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #1a1a1a;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* ============================================
+   TodoList Collapse Card Styles
+   ============================================ */
+.todoCollapse {
+  background: #f8fafc;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.todoCollapse :global(.ant-collapse-header) {
+  padding: 10px 12px !important;
+  background: #f1f5f9;
+  border-radius: 8px !important;
+  transition: background 0.2s ease;
+}
+
+.todoCollapse :global(.ant-collapse-header:hover) {
+  background: #e2e8f0;
+}
+
+.todoCollapse :global(.ant-collapse-content) {
+  background: transparent;
+  border-top: none;
+}
+
+.todoCollapse :global(.ant-collapse-content-box) {
+  padding: 12px !important;
+}
+
+.collapseHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #475569;
+}
+
+.collapseIcon {
+  color: #64748b;
+  font-size: 14px;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .traceRow {
+    animation: none;
+  }
+
+  .traceRowContent {
+    transition: none;
+  }
+
+  .traceRowChevron {
+    transition: none;
+  }
+}
+
+/* Cards list */
+.cardsList {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 8px;
+}

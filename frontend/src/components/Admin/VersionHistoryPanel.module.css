@@ -1,0 +1,291 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+  margin-bottom: 12px;
+}
+
+.headerTitle {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.createSection {
+  padding: 12px;
+  background: #fafafa;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.createRow {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.versionList {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.versionItem {
+  display: flex;
+  align-items: flex-start;
+  padding: 10px 12px;
+  border: 1px solid #f0f0f0;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.versionItem:hover {
+  border-color: #1890ff;
+  background: #fafbff;
+}
+
+.versionItemSelected {
+  border-color: #1890ff;
+  background: #e6f4ff;
+}
+
+.versionItemActive {
+  border-color: #52c41a;
+  background: #f6ffed;
+}
+
+/* Compare toggle selector */
+.compareToggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  width: 22px;
+  height: 22px;
+  margin-right: 10px;
+  margin-top: 0;
+  flex-shrink: 0;
+  border: 1.5px solid #d9d9d9;
+  border-radius: 50%;
+  background: #fff;
+  color: #bbb;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.compareToggle:hover {
+  border-color: #1890ff;
+  color: #1890ff;
+  background: #e6f4ff;
+}
+
+.compareToggle:active {
+  transform: scale(0.92);
+}
+
+.compareToggleSelected {
+  border-color: #1890ff;
+  background: #1890ff;
+  color: #fff;
+}
+
+.compareToggleSelected:hover {
+  background: #40a9ff;
+  border-color: #40a9ff;
+  color: #fff;
+}
+
+.versionBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  background: #f0f0f0;
+  color: #666;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
+.versionBadgeActive {
+  background: #e6f4ff;
+  color: #1890ff;
+}
+
+.versionInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.versionLabel {
+  font-size: 13px;
+  font-weight: 500;
+  color: #333;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 4px;
+  margin: -2px -4px;
+  border-radius: 4px;
+  transition: background 0.15s;
+}
+
+.versionLabel:hover {
+  background: #f0f0f0;
+}
+
+.editIcon {
+  font-size: 11px;
+  color: #bbb;
+  flex-shrink: 0;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.versionLabel:hover .editIcon {
+  opacity: 1;
+}
+
+.editLabelRow {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.editLabelInput {
+  flex: 1;
+  min-width: 0;
+}
+
+.editLabelCancel {
+  flex-shrink: 0;
+  color: #999;
+}
+
+.versionMeta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+  font-size: 12px;
+  color: #999;
+}
+
+.versionActions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+/* Compare bar */
+.compareBar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 12px;
+  background: #fafafa;
+  border-radius: 8px;
+  margin-top: 12px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.compareInfo {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  flex: 1;
+  min-width: 0;
+}
+
+.compareChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 6px;
+  background: #e6f4ff;
+  border: 1px solid #91caff;
+  border-radius: 6px;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.compareChipRank {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #1890ff;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.compareChipLabel {
+  color: #1677cc;
+  font-weight: 500;
+}
+
+.compareChipRemove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: #999;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.15s;
+}
+
+.compareChipRemove:hover {
+  background: #ff4d4f;
+  color: #fff;
+}
+
+.compareArrow {
+  color: #bbb;
+  font-size: 12px;
+  margin: 0 2px;
+}
+
+.compareActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 40px 20px;
+  color: #999;
+}

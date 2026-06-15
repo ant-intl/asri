@@ -1,0 +1,80 @@
+.layout {
+  min-height: 100vh;
+}
+
+.contentLayout {
+  margin-left: 220px;
+  transition: margin-left 0.3s ease;
+  background: #f5f7fa;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Chat page only: fixed height for internal scrolling */
+.chatLayout {
+  height: 100vh;
+}
+
+.contentLayout.collapsed {
+  margin-left: 0;
+}
+
+/* Mobile: hide sidebar, full width content */
+@media (max-width: 768px) {
+  .contentLayout {
+    margin-left: 0;
+  }
+}
+
+/* Header */
+.header {
+  height: 52px;
+  line-height: 52px;
+  background: #fff !important;
+  border-bottom: 1px solid #e8edf3;
+  padding: 0 24px !important;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-shrink: 0;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #4b5563;
+  font-size: 14px;
+}
+
+.headerIcon {
+  font-size: 15px;
+  color: #6b7280;
+  cursor: pointer;
+  transition: color 0.15s;
+}
+
+.headerIcon:hover {
+  color: #1677ff;
+}
+
+.content {
+  flex: 1;
+  overflow: hidden;
+  background: #f5f7fa;
+  min-height: 0;
+}
+
+/* Mobile: allow content to scroll naturally */
+@media (max-width: 768px) {
+  .content {
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
+  }
+}

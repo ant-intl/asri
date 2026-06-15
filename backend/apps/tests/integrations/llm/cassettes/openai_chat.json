@@ -1,0 +1,32 @@
+{
+  "body": {
+    "id": "chatcmpl-abc123",
+    "object": "chat.completion",
+    "created": 1709654400,
+    "model": "gpt-4",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "Hello! How can I assist you today?"
+        },
+        "logprobs": null,
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 12,
+      "completion_tokens": 9,
+      "total_tokens": 21
+    },
+    "system_fingerprint": "fp_abc123"
+  },
+  "status_code": 200,
+  "_meta": {
+    "recorded_at": "2024-03-05T12:00:00Z",
+    "provider": "openai",
+    "endpoint": "/v1/chat/completions",
+    "note": "Standard OpenAI chat completion response format. See: https://platform.openai.com/docs/api-reference/chat/object"
+  }
+}

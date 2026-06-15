@@ -1,0 +1,38 @@
+.container {
+  padding: 24px;
+  height: 100%;
+  overflow: auto;
+}
+
+.header {
+  margin-bottom: 16px;
+}
+
+.title {
+  margin: 0 !important;
+}
+
+.tabs {
+  background: #fff;
+  border-radius: 8px;
+}
+
+.tabs :global(.ant-tabs-nav) {
+  margin-bottom: 0;
+  padding: 0 16px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.tabs :global(.ant-tabs-content) {
+  padding: 16px;
+}
+
+.tabLabel {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tabIcon {
+  font-size: 14px;
+}

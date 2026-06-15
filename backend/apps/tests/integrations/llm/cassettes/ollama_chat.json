@@ -1,0 +1,25 @@
+{
+  "body": {
+    "model": "llama2",
+    "created_at": "2024-03-05T12:00:00.000000Z",
+    "message": {
+      "role": "assistant",
+      "content": "Hello! How can I assist you today?"
+    },
+    "done": true,
+    "done_reason": "stop",
+    "total_duration": 1234567890,
+    "load_duration": 123456789,
+    "prompt_eval_count": 12,
+    "prompt_eval_duration": 234567890,
+    "eval_count": 9,
+    "eval_duration": 345678901
+  },
+  "status_code": 200,
+  "_meta": {
+    "recorded_at": "2024-03-05T12:00:00Z",
+    "provider": "ollama",
+    "endpoint": "/api/chat",
+    "note": "Ollama chat response format. See: https://github.com/ollama/ollama/blob/main/docs/api.md#generate-a-chat-completion"
+  }
+}

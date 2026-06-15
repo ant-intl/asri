@@ -1,0 +1,39 @@
+.container {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.welcome {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: #f5f7fa;
+}
+
+.welcomeIcon {
+  width: 64px;
+  height: 64px;
+  background: #f0f5ff;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  color: #1677ff;
+  margin-bottom: 20px;
+}
+
+.welcomeTitle {
+  color: #1a1a1a;
+  margin-bottom: 8px !important;
+  font-weight: 600;
+}
+
+.welcomeText {
+  color: #9ca3af;
+  font-size: 14px;
+}
