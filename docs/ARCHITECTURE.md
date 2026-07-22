@@ -387,3 +387,63 @@ New Message arrives
 - [Chat API](docs/chat-api.md) - Chat API documentation
 - [Agent System](docs/agent-guide.md) - ReAct/Pipeline Agent deep dive
 - [Extension Guide](docs/extension-guide.md) - Adding new providers
+
+---
+
+## Voice Agent Module
+
+The `voice/` directory contains a speech-to-speech voice agent module (`asri-voice` package) based on the Heartbeat Interaction design. It can run as a standalone asyncio backend or be integrated into the ASRI Django server via `VoiceConsumer` (WebSocket bridge), sharing the same process on port 8000.
+
+### Architecture Position
+
+```
+┌──────────────────────────────────────────────────────┐
+│                    Frontend (React)                    │
+│  ┌─────────────┐        ┌──────────────────────────┐  │
+│  │  Chat Page   │        │  Voice Page (/voice)      │  │
+│  │  (Ant Design)│        │  (Tailwind + Pipecat Kit) │  │
+│  └──────┬───────┘        └────────────┬──────────────┘  │
+└─────────┼───────────────────────────┼───────────────────┘
+          │ HTTP/WS                    │ WebSocket
+          ▼                            ▼
+┌──────────────────┐      ┌──────────────────────────────┐
+│  ASRI Backend     │      │  Voice Backend (voice/)       │
+│  (Django :8000)   │◄────►│  (asri-voice package)         │
+│  Text Chat Agent  │      │  VAD → ASR → LLM → TTS       │
+│  + VoiceConsumer  │      │  standalone :8001 or :8000    │
+└──────────────────┘      └──────────────────────────────┘
+```
+
+### Main Pipeline
+
+The voice backend implements a full-duplex speech pipeline:
+
+1. **VAD (Voice Activity Detection)** — Detects speech start/stop in real-time audio stream
+2. **ASR (Automatic Speech Recognition)** — Transcribes user speech to text (FunASR)
+3. **Heartbeat Thinking** — Generates lightweight thinking entries during user speech; triggers tool calls concurrently when parameters stabilize
+4. **LLM Agent Loop** — Processes transcript, executes tools, generates response
+5. **TTS (Text-to-Speech)** — Streams audio response back (OpenAI TTS / ElevenLabs / Dashscope / Qwen3-TTS)
+
+### Frontend Integration
+
+The voice UI is integrated into the ASRI frontend as a separate route:
+
+- **Route**: `/voice` — full-screen voice interaction page (outside MainLayout)
+- **Components**: `frontend/src/components/Voice/` — VoiceApp, S2STransport, SystemLogPanel, DemoConversation, AutoOpenFunctionCall
+- **Styling**: Tailwind CSS (scoped, no preflight reset) to avoid conflicting with Ant Design
+- **WebSocket Proxy**: Vite dev server proxies `/v1/realtime` to `ws://localhost:8001`
+
+### OpenAI Realtime API Compatibility
+
+The voice backend exposes a WebSocket interface at `/v1/realtime/audio` that is compatible with the OpenAI Realtime API event format. The frontend `S2STransport` class translates between OpenAI Realtime events and the RTVI protocol used by PipecatClient components.
+
+### Key Directories
+
+| Path | Description |
+|------|-------------|
+| `voice/asri_voice/` | Core pipeline code (handlers, tools, API, connections) |
+| `voice/configs/` | YAML configuration and system prompts |
+| `voice/tests/` | Test suite |
+| `voice/client/` | Replay client for session recording |
+
+For detailed setup and usage, see [`voice/README.md`](../voice/README.md).

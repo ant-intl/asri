@@ -36,6 +36,9 @@ from ...parsers.mapper import OutputMapper
 
 from apps.integrations.tool.base import ToolRegistry
 
+# Shared agent loop utilities (tool delta accumulation + JSON parsing)
+from core.agent_loop import AgentLoopCore
+
 logger = logging.getLogger(__name__)
 
 
@@ -930,33 +933,25 @@ class FullDuplexLLMProcessor(FrameProcessor):
                         collected_tool_calls.append(tool_call)
 
             elif chunk_type == "tool_calls_delta":
-                # Accumulate tool_call arguments across streaming chunks.
-                # vLLM/OAI streaming splits function arguments into multiple
-                # delta chunks (e.g. {"arguments":"{\"query\":"},
-                # {"arguments":"\"test\""}). We buffer per tool index and
-                # only dispatch at stream end.
+                # Accumulate tool_call arguments across streaming chunks
+                # using shared AgentLoopCore utility (same OpenAI delta format)
                 for tc in chunk.get("tool_calls", []):
-                    idx = tc.get("index", 0)
-                    func_info = tc.get("function", {})
-                    func_name = func_info.get("name", "")
-                    args_fragment = func_info.get("arguments", "")
-                    tool_id = tc.get("id", "")
+                    AgentLoopCore._accumulate_tool_delta(tc, tool_call_buffers)
 
-                    # Initialize buffer on first sight of this tool index
-                    if idx not in tool_call_buffers:
-                        tool_call_buffers[idx] = {
-                            "id": tool_id or "",
-                            "name": func_name or "",
-                            "arguments": "",
-                        }
-                    # Update fields if provided in this chunk
-                    if tool_id:
-                        tool_call_buffers[idx]["id"] = tool_id
-                    if func_name:
-                        tool_call_buffers[idx]["name"] = func_name
-                    # Accumulate arguments fragment
-                    if args_fragment:
-                        tool_call_buffers[idx]["arguments"] += args_fragment
+                    # Streaming dispatch: if accumulated args form valid JSON,
+                    # dispatch immediately via on_tool_call callback
+                    if on_tool_call:
+                        buf = tool_call_buffers.get(tc.get("index", 0))
+                        if buf and buf["name"]:
+                            parsed = AgentLoopCore._try_parse_tool(buf)
+                            if parsed and parsed.call_id not in sent_tool_call_ids:
+                                sent_tool_call_ids.add(parsed.call_id)
+                                tool_call = {
+                                    "function_name": parsed.name,
+                                    "arguments": parsed.arguments,
+                                    "tool_call_id": parsed.call_id,
+                                }
+                                await on_tool_call(tool_call)
 
             elif chunk_type == "usage":
                 # Handle usage-only chunk (final streaming chunk with token stats)
@@ -976,28 +971,21 @@ class FullDuplexLLMProcessor(FrameProcessor):
                 break
 
         # Flush accumulated tool calls from tool_calls_delta chunks.
-        # Arguments have been accumulated across all delta chunks; now parse
-        # the complete JSON and dispatch.
+        # Use shared AgentLoopCore parser for remaining undelivered tools.
         if tool_call_buffers:
             for idx in sorted(tool_call_buffers.keys()):
                 buf = tool_call_buffers[idx]
-                if not buf["name"]:
+                parsed = AgentLoopCore._try_parse_tool(buf)
+                if parsed is None:
                     continue
-                tool_id = buf["id"] or f"tc_{uuid.uuid4().hex[:8]}"
-                if tool_id in sent_tool_call_ids:
+                if parsed.call_id in sent_tool_call_ids:
                     continue
-                sent_tool_call_ids.add(tool_id)
-
-                args_str = buf["arguments"] or "{}"
-                try:
-                    arguments = json.loads(args_str) if isinstance(args_str, str) else args_str
-                except json.JSONDecodeError:
-                    arguments = {"raw": args_str}
+                sent_tool_call_ids.add(parsed.call_id)
 
                 tool_call = {
-                    "function_name": buf["name"],
-                    "arguments": arguments,
-                    "tool_call_id": tool_id,
+                    "function_name": parsed.name,
+                    "arguments": parsed.arguments,
+                    "tool_call_id": parsed.call_id,
                 }
 
                 if on_tool_call:

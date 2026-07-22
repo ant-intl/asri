@@ -1,10 +1,11 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import tailwindcss from '@tailwindcss/vite'
 import path from 'path'
 
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => ({
-  plugins: [react()],
+  plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
@@ -27,6 +28,10 @@ export default defineConfig(({ mode }) => ({
         changeOrigin: true,
       },
       '/ws': {
+        target: 'ws://localhost:8000',
+        ws: true,
+      },
+      '/v1/realtime': {
         target: 'ws://localhost:8000',
         ws: true,
       },

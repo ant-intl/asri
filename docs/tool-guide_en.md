@@ -52,7 +52,7 @@ if tool:
 
 **File**: `apps/integrations/tool/mcp_tool.py`
 
-Wraps the Alipay MCP (Model Context Protocol) remote tool execution service. Automatically registers with ToolRegistry on module load.
+Wraps the MCP (Model Context Protocol) remote tool execution service. Automatically registers with ToolRegistry on module load.
 
 ### Input Format
 

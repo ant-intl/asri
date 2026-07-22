@@ -1,0 +1,36 @@
+/*
+ * Tailwind CSS for Voice components only.
+ * Imports theme + utilities WITHOUT preflight reset to avoid
+ * conflicting with Ant Design's global styles.
+ *
+ * voice-ui-kit styles provide component theming (buttons, panels, etc.).
+ * Its @layer base reset is lower priority than Ant Design's unlayered styles,
+ * so it won't override Ant Design components.
+ */
+@import "tailwindcss/theme";
+@import "tailwindcss/utilities";
+@import "@pipecat-ai/voice-ui-kit/styles.css";
+
+/* Custom utilities — from original Heartbeat project */
+.no-scrollbar,
+.no-scrollbar * {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar,
+.no-scrollbar *::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide "Listening..." interim messages - replaced by recording duration overlay */
+.listening-message,
+[data-listening="true"] {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Loading dots animation for user bubble */
+@keyframes dotPulse {
+  0%, 80%, 100% { opacity: 0.3; transform: scale(1); }
+  40% { opacity: 1; transform: scale(1.2); }
+}

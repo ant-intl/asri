@@ -107,7 +107,7 @@ class BaseLLMProvider(ABC):
         Return the provider type identifier.
         
         Returns:
-            String identifier (e.g., 'openai', 'ollama', 'cockpit')
+            String identifier (e.g., 'openai', 'ollama', 'custom')
         """
         pass
     

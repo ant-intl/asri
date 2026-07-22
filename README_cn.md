@@ -35,6 +35,18 @@ ASRI 是一个基于 Django 4.1 的智能对话机器人服务，在系统层彻
 - **数据库支持**：SQLite（默认，零配置）或 MySQL（生产）
 - **Docker 支持**：一键部署，Docker Compose 开箱即用
 
+### 语音 Agent（Heartbeat Interaction）
+
+ASRI 包含一个端到端的语音 Agent，将文本对话扩展为实时语音交互：
+
+- **Heartbeat Interaction**：边听边想——在用户说话过程中生成轻量 thinking entry，参数稳定时并发触发工具
+- **全链路**：VAD → ASR → LLM Agent Loop → TTS → 流式响应
+- **OpenAI Realtime 兼容**：WebSocket 接口兼容 OpenAI Realtime API
+- **多 TTS 后端**：OpenAI TTS、ElevenLabs、百炼等
+
+语音后端位于 `voice/`，语音 UI 通过 Web 界面的 `/voice` 路由访问。
+详见 [`voice/README.md`](voice/README.md)。
+
 ## 系统架构
 
 ![ASRI 系统架构](docs/architecture.drawio.png)
@@ -43,7 +55,7 @@ ASRI 是一个基于 Django 4.1 的智能对话机器人服务，在系统层彻
 
 ## ARC 模型 — 敬请期待
 
-[ARC（Advantage Regularization Conditioning）](https://yuque.antfin.com/tongyongqi.yq/envrsy/zq8hgaem6dpblg2g) 是一种面向开放式交互场景的强化学习算法。它解决了多策略 RL 中的**奖励不公**问题——当 Agent 需要学习何时静默思考、何时对外回答、何时调用工具时，全局优势比较会不公平地惩罚较短策略。
+ARC（Advantage Regularization Conditioning）是一种面向开放式交互场景的强化学习算法。它解决了多策略 RL 中的**奖励不公**问题——当 Agent 需要学习何时静默思考、何时对外回答、何时调用工具时，全局优势比较会不公平地惩罚较短策略。
 
 ARC 让模型公平地掌握所有这些策略。结合 INTER3 通道分离架构，实现了**更高准确率与更低延迟**的双重提升：
 
@@ -176,8 +188,16 @@ asri/
 │   ├── src/                 # 源代码
 │   ├── package.json         # NPM 依赖
 │   └── vite.config.ts       # Vite 配置
+├── core/                    # 共享 Agent Loop 核心
 ├── config/                  # Django 项目配置
 ├── docs/                    # 技术文档
+├── voice/                   # 语音 Agent 模块（asri-voice 包）
+│   ├── asri_voice/          # 语音管线核心（VAD → ASR → LLM → TTS）
+│   ├── configs/             # YAML 配置和 system prompt
+│   ├── tests/               # 测试
+│   ├── client/              # 回放客户端
+│   └── pyproject.toml       # 语音包依赖（uv）
+├── pyproject.toml           # 根 workspace 定义（uv）
 ├── Dockerfile               # Docker 镜像
 ├── docker-compose.yml       # Docker Compose
 ├── setup.sh                 # 一键安装脚本

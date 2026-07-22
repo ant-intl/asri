@@ -1,0 +1,55 @@
+# ── Runtime / build artifacts ──────────────────────────────────────────────────
+uv.lock
+tmp/
+.tmp/
+cache/
+runs/
+logs/
+eval_results/
+eval_data_v3/
+cxscore_eval_v3/exp/
+cxscore_eval_v3/.env
+tmp_nemotron_*.jsonl
+tmp_nemotron_*.json
+scripts/*.swp
+
+# ── Internal deployment configs (API keys, internal URLs) ─────────────────────
+configs/internal/
+
+# ── Internal benchmark framework ──────────────────────────────────────────────
+bench/
+
+# ── Internal design documents ──────────────────────────────────────────────────
+docs/
+
+# ── Internal scripts (distillation replay, heartbeat probes, UCloud jobs) ──────
+scripts/
+
+# ── Internal services (EPOS knowledge/query, ASR streaming/align) ──────────────
+services/
+
+# ── Internal heartbeat testing and distillation tools ──────────────────────────
+heartbeat_audio_client.py
+heartbeat_replay_distill.py
+
+# ── Embedded-XML PNG exports (too large for GitHub) ────────────────────────────
+heartbeat-architecture.drawio.png
+heartbeat-interaction-flow.drawio.png
+
+# ── Internal business-specific tools (EPOS, FDBench) and their tests ───────────
+asri_voice/tools/epos_tools.py
+asri_voice/tools/epos_tools_knowledge.py
+asri_voice/tools/fdb_v3_tools.py
+asri_voice/tools/asri_tools.py
+tests/test_epos_verification_tools.py
+tests/test_asri_tools.py
+
+# ── Internal voice samples ─────────────────────────────────────────────────────
+configs/voices/
+
+# ── FD Bench local datasets and eval artifacts ─────────────────────────────────
+bench/Full-Duplex-Bench/v1_v1.5/dataset/v1.0/
+bench/Full-Duplex-Bench/v1_v1.5/dataset/v1_5/
+bench/Full-Duplex-Bench/v1_v1.5/evaluation/*_behavior.log
+bench/Full-Duplex-Bench/v1_v1.5/evaluation/*_general.log
+bench/Full-Duplex-Bench/v1_v1.5/evaluation/example_data/**/latency_intervals.json

@@ -19,6 +19,7 @@ from .http import (
     tool_config,
     trace,
     version as version_api,
+    voice_agent_config,
 )
 from .prompt_template import (
     PromptTemplateListView,
@@ -114,4 +115,8 @@ urlpatterns = [
     path('admin/snapshots/', snapshot.SnapshotListView.as_view(), name='admin_snapshot_list'),
     path('admin/snapshots/<str:snapshot_id>/', snapshot.SnapshotDetailView.as_view(), name='admin_snapshot_detail'),
     path('admin/snapshots/<str:snapshot_id>/config/', snapshot.SnapshotConfigPreviewView.as_view(), name='admin_snapshot_config'),
+
+    # Voice Agent Config endpoints (admin)
+    path('admin/voice-agent-config/', voice_agent_config.VoiceAgentConfigListView.as_view(), name='admin_voice_agent_config_list'),
+    path('admin/voice-agent-config/<int:pk>/', voice_agent_config.VoiceAgentConfigDetailView.as_view(), name='admin_voice_agent_config_detail'),
 ]

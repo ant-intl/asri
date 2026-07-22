@@ -19,25 +19,7 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 FRONTEND_DIR="$SCRIPT_DIR/frontend"
 PORT=${2:-8000}
 
-# 解析参数
-case "${1:-}" in
-    --quick)
-        # 跳过构建直接启动
-        start_backend
-        exit 0
-        ;;
-    --setup)
-        # 先运行 setup.sh
-        if [ -f "$SCRIPT_DIR/setup.sh" ]; then
-            bash "$SCRIPT_DIR/setup.sh"
-        else
-            echo "[错误] setup.sh 不存在"
-            exit 1
-        fi
-        start_backend
-        exit 0
-        ;;
-esac
+# 参数解析在函数定义之后进行
 
 # 检测操作系统
 detect_os() {
@@ -57,12 +39,16 @@ detect_os() {
 OS_TYPE=$(detect_os)
 
 # 设置 Python 命令（优先使用虚拟环境）
+# Priority: venv > .venv > voice/.venv > system python3
 if [ -d "$SCRIPT_DIR/venv" ]; then
     PYTHON_CMD="$SCRIPT_DIR/venv/bin/python3"
     DAPHNE_CMD="$SCRIPT_DIR/venv/bin/daphne"
 elif [ -d "$SCRIPT_DIR/.venv" ]; then
     PYTHON_CMD="$SCRIPT_DIR/.venv/bin/python3"
     DAPHNE_CMD="$SCRIPT_DIR/.venv/bin/daphne"
+elif [ -d "$SCRIPT_DIR/voice/.venv" ]; then
+    PYTHON_CMD="$SCRIPT_DIR/voice/.venv/bin/python3"
+    DAPHNE_CMD="$SCRIPT_DIR/voice/.venv/bin/daphne"
 else
     PYTHON_CMD="python3"
     DAPHNE_CMD="daphne"
@@ -132,9 +118,8 @@ start_backend() {
     kill_port_if_in_use "$PORT"
     echo "[后端] 启动 Django 服务 (端口：$PORT)..."
     cd "$SCRIPT_DIR/backend"
-    export PYTHONPATH="$SCRIPT_DIR:$PYTHONPATH"
+    export PYTHONPATH="$SCRIPT_DIR:$SCRIPT_DIR/voice:$SCRIPT_DIR/voice/asri_voice:$PYTHONPATH"
     $PYTHON_CMD manage.py migrate --noinput
-    $PYTHON_CMD manage.py seed_data
     $DAPHNE_CMD -b 0.0.0.0 -p "$PORT" config.asgi:application
 }
 
@@ -146,9 +131,8 @@ start_dev_mode() {
 
     # 后台启动后端
     cd "$SCRIPT_DIR/backend"
-    export PYTHONPATH="$SCRIPT_DIR:$PYTHONPATH"
+    export PYTHONPATH="$SCRIPT_DIR:$SCRIPT_DIR/voice:$SCRIPT_DIR/voice/asri_voice:$PYTHONPATH"
     $PYTHON_CMD manage.py migrate --noinput
-    $PYTHON_CMD manage.py seed_data
     $DAPHNE_CMD -b 0.0.0.0 -p 8000 config.asgi:application &
     BACKEND_PID=$!
 
@@ -164,6 +148,20 @@ start_dev_mode() {
 
 # 根据参数选择启动模式
 case "${1:-}" in
+    --quick)
+        # 跳过构建直接启动
+        start_backend
+        ;;
+    --setup)
+        # 先运行 setup.sh
+        if [ -f "$SCRIPT_DIR/setup.sh" ]; then
+            bash "$SCRIPT_DIR/setup.sh"
+        else
+            echo "[错误] setup.sh 不存在"
+            exit 1
+        fi
+        start_backend
+        ;;
     dev)
         start_dev_mode
         ;;
@@ -184,6 +182,8 @@ case "${1:-}" in
         echo "  ./start.sh backend       # 仅启动后端"
         echo "  ./start.sh --quick       # 跳过构建，直接启动"
         echo "  ./start.sh --setup       # 先 setup.sh 再启动"
+        echo ""
+        echo "语音对话已集成到 Django (VoiceConsumer)，单端口 8000"
         exit 1
         ;;
 esac

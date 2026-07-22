@@ -13,6 +13,7 @@ from .mcp_server import McpServerConfig, McpToolMockConfig
 from .hook_config import HookConfig
 from .session_snapshot import SessionSnapshot
 from .version_snapshot import VersionSnapshot
+from .voice_agent_config import VoiceAgentConfig
 from .token_usage import TokenUsage
 
 __all__ = [
@@ -29,5 +30,6 @@ __all__ = [
     'McpToolMockConfig',
     'SessionSnapshot',
     'VersionSnapshot',
+    'VoiceAgentConfig',
     'TokenUsage',
 ]

@@ -29,6 +29,7 @@ opentracing
 
 # LLM Integration
 openai>=1.0.0
+langchain>=0.0.325  # CVE: PythonAstREPLTool arbitrary code execution (< 0.0.325)
 
 # Data Validation
 pydantic>=2.0
@@ -59,3 +60,22 @@ packaging==26.0
 pyopenssl==25.1.0
 
 aiohttp==3.13.3
+
+# -----------------------------------------------------------------------
+# Voice Integration (speech-to-speech pipeline runs in Django process)
+# -----------------------------------------------------------------------
+torch==2.11.0; sys_platform == 'darwin'
+torchaudio==2.11.0; sys_platform == 'darwin'
+torch>=2.4.0; sys_platform != 'darwin'
+torchvision>=0.26.0
+transformers>=4.36.0
+rich>=13.0
+numpy>=1.24.0
+pyyaml>=6.0
+nltk==3.9.1
+websockets>=12.0
+funasr>=1.1.6
+faster-whisper>=1.0.3
+modelscope>=1.17.1
+lingua-language-detector>=2.0.2
+sounddevice>=0.5.0

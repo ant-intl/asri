@@ -25,7 +25,9 @@ import {
   RobotOutlined,
   ControlOutlined,
   CameraOutlined,
+  AudioOutlined,
 } from '@ant-design/icons';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { getSessions, createSession, deleteSession } from '@/api/session';
 import { useChatStore } from '@/stores/chatStore';
@@ -51,6 +53,9 @@ const Sidebar: React.FC<SidebarProps> = ({ collapsed: propsCollapsed, onCollapse
   const [expandedMenus, setExpandedMenus] = useState<Set<SubMenuKey>>(new Set(['chat', 'tools', 'advanced']));
   const [internalCollapsed, setInternalCollapsed] = useState(false);
   const [showUserContext, setShowUserContext] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const isVoiceRoute = location.pathname === '/voice';
 
   // Mock snapshots data - TODO: replace with actual API call
   const snapshots = [
@@ -151,6 +156,9 @@ const Sidebar: React.FC<SidebarProps> = ({ collapsed: propsCollapsed, onCollapse
     setCurrentSession(session);
     clearMessages();
     setActiveTab('chat');
+    if (location.pathname !== '/chat' && !location.pathname.startsWith('/chat/')) {
+      navigate('/chat');
+    }
   };
 
   const handleDeleteSession = (e: React.MouseEvent, sessionId: string) => {
@@ -176,6 +184,10 @@ const Sidebar: React.FC<SidebarProps> = ({ collapsed: propsCollapsed, onCollapse
 
   const handleTabChange = (key: MenuKey) => {
     setActiveTab(key);
+    // If on /voice route, navigate back to /chat so ChatPage can render the tab
+    if (location.pathname === '/voice') {
+      navigate('/chat');
+    }
     // Auto expand tools menu when any agent setting is selected
     if (['skills', 'mcp', 'prompt', 'models', 'memory', 'context', 'security', 'setting', 'agent-settings', 'version-manager', 'cache-monitor', 'snapshots'].includes(key)) {
       setExpandedMenus((prev) => new Set([...prev, 'tools']));
@@ -296,6 +308,14 @@ const Sidebar: React.FC<SidebarProps> = ({ collapsed: propsCollapsed, onCollapse
           </div>
           <div className={`${styles.menuContentWrapper} ${expandedMenus.has('chat' as SubMenuKey) ? styles.menuContentExpanded : ''}`}>
             {renderSessionList()}
+          </div>
+        </div>
+
+        {/* Voice Menu — link to /voice route (embedded in MainLayout) */}
+        <div className={`${styles.menuItem} ${isVoiceRoute ? styles.menuItemActive : ''}`}>
+          <div className={styles.menuHeader} onClick={() => navigate('/voice')}>
+            <span className={styles.menuIcon}><AudioOutlined /></span>
+            <span className={styles.menuLabel}>Voice</span>
           </div>
         </div>
 

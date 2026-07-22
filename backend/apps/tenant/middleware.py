@@ -98,7 +98,7 @@ def TokenAuthMiddleware(get_response):
 
         # For admin paths, X-Tenant-Id header takes priority over token-based
         # tenant resolution.  This allows admin UI users to switch between
-        # tenants (e.g. from "default" to "alipayHK") without needing a
+        # tenants (e.g. from "default" to "tenant-b") without needing a
         # different Bearer token for each tenant.
         if request.path.startswith('/chatbot/api/admin'):
             admin_tenant_id = AdminAuthRegistry.get_provider().authenticate(request)

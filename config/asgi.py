@@ -7,7 +7,9 @@ Supports both HTTP and WebSocket protocols.
 import os
 import sys
 
-# Add project root and backend to Python path
+# Add project root and backend to Python path.
+# asri_voice is installed as a workspace package via ``uv sync``
+# (see root pyproject.toml [tool.uv.workspace]).
 project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, project_root)
 sys.path.insert(0, os.path.join(project_root, 'backend'))

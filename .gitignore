@@ -76,6 +76,7 @@ Thumbs.db
 
 # 环境配置
 .env
+.env.bak
 .envrc
 *.env.local
 
@@ -91,3 +92,8 @@ test_db.sqlite3
 frontend/node_modules/
 static/frontend/
 backend/templates/frontend/index.html
+
+# Voice module (see voice/.gitignore for subdirectory-specific rules)
+
+# Internal business assets (software copyright illustrations, etc.)
+assets/

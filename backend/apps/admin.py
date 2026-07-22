@@ -6,7 +6,7 @@ from django.contrib import admin
 from .entities import (
     ChatSession, ChatMessage, LLMProviderConfig, RAGProviderConfig,
     ToolConfig, McpServerConfig, McpToolMockConfig, HookConfig,
-    TokenUsage,
+    VoiceAgentConfig, TokenUsage,
 )
 
 @admin.register(ChatSession)
@@ -95,3 +95,13 @@ class TokenUsageAdmin(admin.ModelAdmin):
     list_filter = ['llm_provider', 'model_name', 'gmt_create']
     search_fields = ['session_id', 'user_id', 'model_name']
     readonly_fields = ['gmt_create']
+
+
+@admin.register(VoiceAgentConfig)
+class VoiceAgentConfigAdmin(admin.ModelAdmin):
+    """Admin configuration for VoiceAgentConfig model."""
+
+    list_display = ['name', 'tenant_id', 'is_active', 'gmt_modified']
+    list_filter = ['is_active', 'tenant_id']
+    search_fields = ['name', 'tenant_id']
+    readonly_fields = ['gmt_create', 'gmt_modified']

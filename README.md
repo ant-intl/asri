@@ -35,6 +35,18 @@ ASRI is an intelligent dialogue robot service built on Django 4.1 that addresses
 - **Database Support**: SQLite (default, zero-config) or MySQL (production)
 - **Docker Support**: One-command deployment with Docker Compose
 
+### Voice Agent (Heartbeat Interaction)
+
+ASRI includes a speech-to-speech voice agent that extends text chat with real-time voice interaction:
+
+- **Heartbeat Interaction**: Think while listening — generates lightweight thinking entries during user speech, triggers tools concurrently when parameters stabilize
+- **Full Pipeline**: VAD → ASR → LLM Agent Loop → TTS → Streaming Response
+- **OpenAI Realtime Compatible**: WebSocket interface compatible with OpenAI Realtime API
+- **Multiple TTS Backends**: OpenAI TTS, ElevenLabs, Dashscope, and more
+
+The voice backend runs under `voice/` and the voice UI is accessible at `/voice` in the web interface.
+See [`voice/README.md`](voice/README.md) for backend setup.
+
 ## Architecture
 
 ![ASRI System Architecture](docs/architecture.drawio.png)
@@ -176,8 +188,16 @@ asri/
 │   ├── src/                 # Source code
 │   ├── package.json         # NPM dependencies
 │   └── vite.config.ts       # Vite configuration
+├── core/                    # Shared agent loop core
 ├── config/                  # Django project config
 ├── docs/                    # Technical documentation
+├── voice/                   # Voice Agent module (asri-voice package)
+│   ├── asri_voice/          # Voice pipeline core (VAD → ASR → LLM → TTS)
+│   ├── configs/             # YAML configs and system prompts
+│   ├── tests/               # Tests
+│   ├── client/              # Replay client
+│   └── pyproject.toml       # Voice package dependencies (uv)
+├── pyproject.toml           # Root workspace definition (uv)
 ├── Dockerfile               # Docker image
 ├── docker-compose.yml       # Docker Compose
 ├── setup.sh                 # One-command setup script

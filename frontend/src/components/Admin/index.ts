@@ -17,5 +17,6 @@ export { default as SystemSettings } from './SystemSettings';
 export { default as Settings } from './Settings';
 export { default as SessionSettingsContent } from './SessionSettingsContent';
 export { default as AgentSettings } from './AgentSettings';
+export { default as VoiceAgentConfig } from './VoiceAgentConfig';
 export { default as CacheMonitor } from './CacheMonitor';
 export { default as SnapshotManager } from './SnapshotManager';

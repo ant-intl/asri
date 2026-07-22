@@ -6,8 +6,9 @@ import {
   ApiOutlined,
   ToolOutlined,
   RobotOutlined,
+  AudioOutlined,
 } from '@ant-design/icons';
-import { PromptManager, SkillCardGrid, McpConfig, ToolCardGrid, ModelCardGrid } from '@/components/Admin';
+import { PromptManager, SkillCardGrid, McpConfig, ToolCardGrid, ModelCardGrid, VoiceAgentConfig } from '@/components/Admin';
 import styles from './Settings.module.css';
 
 const { Title, Text } = Typography;
@@ -64,6 +65,16 @@ const AgentSettings: React.FC = () => {
       ),
       children: <ModelCardGrid />,
     },
+    {
+      key: 'voice',
+      label: (
+        <span className={styles.tabLabel}>
+          <AudioOutlined className={styles.tabIcon} />
+          Voice
+        </span>
+      ),
+      children: <VoiceAgentConfig />,
+    },
   ];
 
   return (
@@ -72,7 +83,7 @@ const AgentSettings: React.FC = () => {
         <div>
           <Title level={4} className={styles.title}>Agent Settings</Title>
           <Text type="secondary" className={styles.subtitle}>
-            Manage Prompts, Skills, MCPs, Tools, Models
+            Manage Prompts, Skills, MCPs, Tools, Models, Voice
           </Text>
         </div>
       </div>

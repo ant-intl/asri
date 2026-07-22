@@ -4,6 +4,7 @@ import { ConfigProvider } from 'antd';
 import { MainLayout } from '@/components/Layout';
 import ChatPage from '@/pages/ChatPage';
 import TracePage from '@/pages/TracePage';
+import VoicePage from '@/pages/VoicePage';
 import ErrorBoundary from '@/components/ErrorBoundary';
 
 const queryClient = new QueryClient({
@@ -37,6 +38,7 @@ function App() {
                     <Route path="/" element={<Navigate to="/chat" replace />} />
                     <Route path="/chat" element={<ChatPage />} />
                     <Route path="/chat/:sessionId" element={<ChatPage />} />
+                    <Route path="/voice" element={<VoicePage />} />
                   </Routes>
                 </MainLayout>
               } />

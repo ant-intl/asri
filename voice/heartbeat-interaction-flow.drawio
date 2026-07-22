@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="drawio" version="30.0.4">
+  <diagram name="Heartbeat-Interaction-Flow">
+    <mxGraphModel dx="1500" dy="1150" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1500" pageHeight="1150" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Title -->
+        <mxCell id="title" value="Heartbeat Interaction Flow" style="text;html=1;align=center;verticalAlign=middle;fontSize=20;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="450" y="5" width="400" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Phase 1 label -->
+        <mxCell id="phase1" value="Phase 1: While User Speaks (HeartBeat Thinking)" style="text;html=1;align=left;verticalAlign=middle;fontSize=13;fontStyle=1;fontColor=#999999;" vertex="1" parent="1">
+          <mxGeometry x="30" y="45" width="400" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- Phase separator -->
+        <mxCell id="sep" value="" style="endArrow=none;dashed=1;strokeColor=#bbbbbb;strokeWidth=2;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="30" y="820" as="sourcePoint" />
+            <mxPoint x="1470" y="820" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Phase 2 label -->
+        <mxCell id="phase2" value="Phase 2: After User Finishes (HeartBeat Response)" style="text;html=1;align=left;verticalAlign=middle;fontSize=13;fontStyle=1;fontColor=#999999;" vertex="1" parent="1">
+          <mxGeometry x="30" y="830" width="400" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- n1: User Speech -->
+        <mxCell id="n1" value="User Speech Input" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="650" y="90" width="200" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- n2: Fragment Update -->
+        <mxCell id="n2" value="Real-time Prefix Update&#xa;(fragments continuously flowing)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="650" y="180" width="200" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- n3: HeartBeat Thinking -->
+        <mxCell id="n3" value="HeartBeat Thinking&#xa;(listen + think, lightweight reasoning)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="650" y="270" width="200" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- n4: action? diamond -->
+        <mxCell id="n4" value="action&#xa;decision" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="670" y="370" width="160" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- n5: noop -->
+        <mxCell id="n5" value="action = noop&#xa;no new stable info" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="170" y="385" width="180" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- n6: think -->
+        <mxCell id="n6" value="action = think&#xa;write thinking entry" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="660" y="500" width="180" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- n7: proactive -->
+        <mxCell id="n7" value="action = proactive&#xa;interrupt current turn" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1150" y="385" width="200" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- n8: HeartBeat Harness -->
+        <mxCell id="n8" value="HeartBeat Harness&#xa;validate / permission layers / dedup" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="660" y="590" width="180" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- n9: Tool Execution -->
+        <mxCell id="n9" value="Tool Execution&#xa;pending → completed / failed" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="660" y="680" width="180" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- n10: Turn State -->
+        <mxCell id="n10" value="turn_state&#xa;thinking_entries&#xa;+ tool_calls" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;size=10;" vertex="1" parent="1">
+          <mxGeometry x="670" y="770" width="160" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- n11: Proactive Response -->
+        <mxCell id="n11" value="Proactive Response&#xa;emit response as main reply" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1150" y="500" width="200" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- n12: User Finishes -->
+        <mxCell id="n12" value="User Finishes Speaking (VAD end-of-speech)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="610" y="860" width="280" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- n13: HeartBeat Response -->
+        <mxCell id="n13" value="HeartBeat Response&#xa;consume available results, do not wait for late tasks" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="630" y="950" width="240" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- n14: Final Reply -->
+        <mxCell id="n14" value="Stream Final Reply" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="660" y="1040" width="180" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Edges -->
+
+        <mxCell id="e1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;flowAnimation=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="n1" target="n2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;flowAnimation=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="n2" target="n3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;flowAnimation=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="n3" target="n4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e4" value="noop" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontSize=11;fontColor=#888888;" edge="1" parent="1" source="n4" target="n5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e5" value="think" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;flowAnimation=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=11;fontColor=#82b366;strokeColor=#82b366;" edge="1" parent="1" source="n4" target="n6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e6" value="proactive" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=11;fontColor=#9673a6;strokeColor=#9673a6;strokeWidth=2;" edge="1" parent="1" source="n4" target="n7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e7" value="keep listening" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=11;fontColor=#888888;dashed=1;" edge="1" parent="1" source="n5" target="n2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="260" y="140" />
+              <mxPoint x="590" y="140" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="e8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;flowAnimation=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#82b366;" edge="1" parent="1" source="n6" target="n8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e9" value="execute permitted tools" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;flowAnimation=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=11;fontColor=#d79b00;strokeColor=#d79b00;" edge="1" parent="1" source="n8" target="n9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e10" value="write state" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=11;fontColor=#82b366;strokeColor=#82b366;" edge="1" parent="1" source="n9" target="n10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e11" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#9673a6;strokeWidth=2;" edge="1" parent="1" source="n7" target="n11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e12" value="proactive interrupt" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;fontColor=#9673a6;strokeColor=#9673a6;strokeWidth=2;fontStyle=1;" edge="1" parent="1" source="n11" target="n13">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="940" y="525" />
+              <mxPoint x="940" y="975" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="e13" value="consume results" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=11;fontColor=#82b366;strokeColor=#82b366;" edge="1" parent="1" source="n10" target="n13">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="490" y="790" />
+              <mxPoint x="490" y="975" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="e14" value="user finishes" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontSize=11;fontColor=#6c8ebf;dashed=1;strokeColor=#6c8ebf;" edge="1" parent="1" source="n2" target="n12">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1430" y="205" />
+              <mxPoint x="1430" y="885" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="e15" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;flowAnimation=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="n12" target="n13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e16" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;flowAnimation=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#82b366;strokeWidth=2;" edge="1" parent="1" source="n13" target="n14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Annotation: non-blocking principle -->
+        <mxCell id="anno1" value="Non-blocking principle:&#xa;Input prefix keeps flowing, never waits for thinking&#xa;Response does not wait for late tool results" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontColor=#888888;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="30" y="950" width="320" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Annotation: tool permission types -->
+        <mxCell id="anno2" value="Tool permission layers:&#xa;read_only_repeatable | state_accumulated_auto&#xa;turn_idempotent_once | state_machine_commit" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontColor=#888888;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="880" y="680" width="330" height="50" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

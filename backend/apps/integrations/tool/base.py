@@ -26,6 +26,14 @@ class BaseTool(ABC):
     # List of fields to hide (not visible to LLM, injected from context during execution)
     hidden_fields: List[str] = []
 
+    # Declarative execution policy for Voice Agent integration.
+    # "read"  — read-only, repeatable; both main_llm and heartbeat can call.
+    # "write" — state-changing; only main_llm by default.
+    # The Voice bridge (``get_django_tool_policy``) converts this to Voice's
+    # ``ToolPolicy`` at registration time.  Ignored by Django Chatbot.
+    tool_policy: str = "read"
+    tool_allowed_sources: Optional[tuple[str, ...]] = None  # None = default per tool_policy
+
     # Instance name (separate from class name, used for multi-instance scenarios)
     _instance_name: Optional[str] = None
 

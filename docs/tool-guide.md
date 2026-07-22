@@ -52,7 +52,7 @@ if tool:
 
 **文件**: `apps/integrations/tool/mcp_tool.py`
 
-封装 Alipay MCP (Model Context Protocol) 远程工具执行服务。在模块加载时自动注册到 ToolRegistry。
+封装 MCP (Model Context Protocol) 远程工具执行服务。在模块加载时自动注册到 ToolRegistry。
 
 ### 输入格式
 

@@ -29,6 +29,11 @@ RUN pip install --no-cache-dir -r backend/requirements.txt
 # Copy application code
 COPY backend/ backend/
 COPY config/ config/
+COPY core/ core/
+COPY voice/asri_voice/ voice/asri_voice/
+COPY voice/configs/ voice/configs/
+COPY voice/pyproject.toml voice/
+COPY pyproject.toml ./
 COPY manage.py .
 COPY start.sh setup.sh ./
 

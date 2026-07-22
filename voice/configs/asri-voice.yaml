@@ -1,0 +1,59 @@
+# ASRI Voice realtime agent — open-source default configuration.
+#
+# Override tools_module from CLI when a different tool set is needed, for example:
+#   --tools_module tools.your_business_tools
+mode: realtime
+stt: openai_whisper
+llm: open_api
+tts: openai_tts
+log_level: info
+enable_barge_in: true
+tools_module: tools.demo_tools
+system_prompt_file: ../configs/asri-generic-v0.txt
+
+stt_config:
+  openai_whisper_stt_url: ""        # e.g. https://api.openai.com/v1/audio/transcriptions
+  openai_whisper_stt_api_key: ""    # Your OpenAI API key
+  openai_whisper_stt_model: "whisper-1"
+  openai_whisper_stt_language: "zh"
+  openai_whisper_stt_timeout: 30.0
+
+vad_config:
+  thresh: 0.5
+  min_silence_ms: 500
+  min_speech_ms: 200
+  speech_pad_ms: 300
+  sample_rate: 16000
+
+llm_config:
+  open_api_model_name: ""           # e.g. gpt-4o-mini, qwen-plus, deepseek-chat
+  open_api_base_url: ""             # e.g. https://api.openai.com/v1
+  open_api_api_key: ""              # Your LLM API key
+  open_api_stream: true
+  open_api_disable_thinking: true
+
+tts_config:
+  openai_tts_base_url: ""           # e.g. https://api.openai.com/v1
+  openai_tts_api_key: ""            # Your TTS API key
+  openai_tts_model: "tts-1"
+  openai_tts_voice: "alloy"
+  openai_tts_speed: 1.0
+  openai_tts_timeout: 30.0
+  openai_tts_sample_rate: 16000
+  openai_tts_blocksize: 512
+
+enable_heartbeat_interaction: true
+heartbeat_interaction_config:
+  mode: "streaming_asr"
+  model_name: ""
+  base_url: ""
+  api_key: ""
+  sensevoice_url: ""
+  sensevoice_timeout: 10.0
+  block_duration_ms: 500
+  request_timeout_s: 5.0
+  max_heartbeat_entries: 99
+  prompt_version: "asri-generic-v0"
+  disable_thinking: true
+  blocking: false
+  max_concurrent: 8

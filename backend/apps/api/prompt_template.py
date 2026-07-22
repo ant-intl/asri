@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 def _tenant_id(request) -> str:
     """Tenant ID from middleware-set ``request.tenant_id``, falling back to ``'example'``."""
     tenant_id = getattr(request, 'tenant_id', None)
-    return tenant_id if isinstance(tenant_id, str) and tenant_id else 'example'
+    return tenant_id if isinstance(tenant_id, str) and tenant_id else 'default'
 
 
 def serialize_template(t: PromptTemplate) -> dict:

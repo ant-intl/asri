@@ -147,6 +147,7 @@ seed_data() {
     info "创建默认种子数据..."
     cd "$BACKEND_DIR"
     python manage.py seed_data
+    python manage.py seed_voice_config
     info "种子数据创建完成"
 }
 
@@ -188,4 +189,12 @@ fi
 
 run_migrations
 seed_data
+
+# ── Voice 模块 (可选) ────────────────────────────────────────────
+# Voice 模块使用 uv 管理依赖，独立于 ASRI 后端
+# 如需使用语音功能，请手动执行:
+#   cd voice && uv sync
+#   cd voice && uv run python src/main.py --config configs/asri-voice.yaml
+# ────────────────────────────────────────────────────────────────
+
 print_summary
